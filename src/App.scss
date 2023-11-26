@@ -1,0 +1,15 @@
+.mainView {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  .content {
+    position: relative;
+    background: #fcfcfc;
+    width: 100%;
+    height: 100dvh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px 0 50px;
+  }
+}

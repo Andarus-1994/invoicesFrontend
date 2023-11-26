@@ -1,0 +1,42 @@
+.header {
+  position: relative;
+  width: 100%;
+  margin-bottom: 50px;
+  h3 {
+    padding: 0;
+    color: #08afc9;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0;
+    line-height: 36px;
+  }
+  h4 {
+    padding: 0;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 500;
+    color: #272727;
+  }
+  .bgIcons {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    left: 450px;
+    top: 30px;
+    width: 60%;
+    opacity: 0.2;
+    svg {
+      width: 60px;
+      margin-top: 20px;
+      &:nth-of-type(even) {
+        transform: rotateZ(30deg);
+        margin-top: 45px;
+      }
+      &:nth-of-type(odd) {
+        transform: rotateZ(-35deg);
+        margin-top: 1px;
+      }
+    }
+  }
+}
