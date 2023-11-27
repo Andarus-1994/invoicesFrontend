@@ -1,11 +1,15 @@
+.containerDetails {
+  flex: 1;
+  max-width: 1000px;
+}
+
 .invoiceDetails {
   margin-top: 27px;
   border-radius: 10px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.4);
   padding: 20px 40px;
   font-family: "Asap", sans-serif;
-  flex: 1;
-  height: 400px;
+  min-height: 400px;
   .statusSide {
     display: flex;
     justify-content: space-between;

@@ -4,7 +4,7 @@ import "./InvoiceDetails.scss"
 export default function InvoiceDetails() {
   const [invoice] = useState(14120)
   return (
-    <>
+    <div className="containerDetails">
       <div className="invoiceDetails">
         <div className="statusSide">
           <span>Status : Sent</span> <button>Export</button>
@@ -28,6 +28,7 @@ export default function InvoiceDetails() {
         </div>
         <div>More info will be here</div>
       </div>
-    </>
+      <div>A table should be here</div>
+    </div>
   )
 }
