@@ -1,0 +1,18 @@
+.invoiceDetails {
+  border-radius: 10px;
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  flex: 1;
+  height: 400px;
+  h3 {
+    color: #08afc9;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  h4 {
+    font-weight: 600;
+    font-size: 18px;
+  }
+}

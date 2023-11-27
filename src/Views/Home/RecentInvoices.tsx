@@ -3,6 +3,7 @@ import "./RecentInvoices.scss"
 import Select from "react-select"
 import { TiDocumentAdd } from "react-icons/ti"
 import InvoicesList from "./InvoicesList"
+import InvoiceDetails from "./InvoiceDetails"
 
 export default function RecentInvoices() {
   const [invoicesPeriod, setInvoicesPeriod] = useState<string | number | undefined>("")
@@ -48,6 +49,7 @@ export default function RecentInvoices() {
           </div>
           <InvoicesList invoices={InvoicesArray} />
         </div>
+        <InvoiceDetails />
       </div>
     </>
   )
