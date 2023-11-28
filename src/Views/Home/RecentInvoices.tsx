@@ -15,8 +15,9 @@ export default function RecentInvoices() {
 
   const InvoicesArray = [
     { id: 1, name: "Electricity  Bill", client: "Electron Plus", amount: 2500 },
-    { id: 1, name: "Invoice 245", client: "Bill Bro", amount: 1200 },
-    { id: 1, name: "Water Bill", client: "Water Well", amount: 1750 },
+    { id: 2, name: "Invoice 245", client: "Bill Bro", amount: 1200 },
+    { id: 3, name: "Water Bill", client: "Water Well", amount: 1750 },
+    { id: 4, name: "Internet Bill", client: "Internet Univ LTD", amount: 50 },
   ]
   return (
     <>
