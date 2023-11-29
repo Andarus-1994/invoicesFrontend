@@ -1,28 +1,23 @@
 import "./InvoicesList.scss"
-
-type Invoice = {
-  id: number
-  name: string
-  client: string
-  amount: number | string
-}
+import { InvoiceType } from "../../../Components/Types/Invoice"
 
 interface InvoicesListProps {
-  invoices: Invoice[] // Corrected the type declaration
+  invoices: InvoiceType[]
+  selectInvoice: (invoice: InvoiceType) => void
 }
 
-export default function InvoicesList({ invoices }: InvoicesListProps) {
+export default function InvoicesList({ invoices, selectInvoice }: InvoicesListProps) {
   return (
     <>
       <div className="invoicesList">
         {invoices.map((invoice) => {
           return (
-            <div className="invoiceItem">
+            <div className="invoiceItem" onClick={() => selectInvoice(invoice)}>
               <div className="client">
                 <span>{invoice.client}</span> <span>$ {invoice.amount}</span>
               </div>
               <div className="details">
-                <span>20/12/2023</span> <span> Sent</span>
+                <span>{invoice.date_created}</span> <span> Sent</span>
               </div>
             </div>
           )

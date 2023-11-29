@@ -1,5 +1,5 @@
 import "./Home.scss"
-import RecentInvoices from "./RecentInvoices"
+import RecentInvoices from "./RecentInvoices/RecentInvoices"
 
 export default function Home() {
   return (

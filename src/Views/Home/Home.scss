@@ -1,4 +1,6 @@
 .home {
-  height: 120dvh;
   width: 100%;
+  height: calc(100dvh - 170px);
+  padding: 5px;
+  overflow: hidden;
 }

@@ -1,8 +1,13 @@
-import { useState } from "react"
-import "./InvoiceDetails.scss"
+import "./InvoiceDetailsCard.scss"
+import { InvoiceType } from "../Types/Invoice"
 
-export default function InvoiceDetails() {
-  const [invoice] = useState(14120)
+interface InvoiceProps {
+  invoice: InvoiceType | null
+}
+
+export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
+  if (invoice === null) return <div>Select an invoice</div>
+
   return (
     <div className="containerDetails">
       <div className="invoiceDetails">
@@ -11,18 +16,18 @@ export default function InvoiceDetails() {
         </div>
         <div className="detailsSide">
           <div className="invoice">
-            <h4>Invoice : {invoice}</h4>
+            <h4>Invoice : {invoice.id}</h4>
             <div className="labelValue">
               <label className="gray-text">Invoice Number</label>
-              {invoice}
+              {invoice.name}
             </div>
             <div className="labelValue">
               <label className="gray-text">Issue Date</label>
-              24/12/2023
+              {invoice.date_created}
             </div>
           </div>
           <div className="client">
-            <h4>Client Electron</h4>
+            <h4>{invoice.client}</h4>
             <p className="gray-text">244 W Ashland Ave Street, Test Louiseville, new Year station 245, by the bridges</p>
           </div>
         </div>
@@ -55,7 +60,6 @@ export default function InvoiceDetails() {
           </div>
         </div>
       </div>
-      <div>A table should be here</div>
     </div>
   )
 }

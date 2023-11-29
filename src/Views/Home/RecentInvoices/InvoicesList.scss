@@ -1,13 +1,14 @@
-@import "../../assets/scss/colors.scss";
-@import "../../assets/scss/mixins.scss";
+@import "../../../assets/scss/colors.scss";
+@import "../../../assets/scss/mixins.scss";
 
 .invoicesList {
   @include customBoxStyles;
   margin-top: 20px;
-  min-height: 500px;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  height: calc(100% - 70px);
+  overflow: auto;
   .invoiceItem {
     padding: 20px 10px;
     &:not(&:nth-last-of-type(1)) {
