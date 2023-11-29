@@ -12,7 +12,7 @@ export default function InvoicesList({ invoices, selectInvoice }: InvoicesListPr
       <div className="invoicesList">
         {invoices.map((invoice) => {
           return (
-            <div className="invoiceItem" onClick={() => selectInvoice(invoice)}>
+            <div className="invoiceItem" onClick={() => selectInvoice(invoice)} key={invoice.id}>
               <div className="client">
                 <span>{invoice.client}</span> <span>$ {invoice.amount}</span>
               </div>
