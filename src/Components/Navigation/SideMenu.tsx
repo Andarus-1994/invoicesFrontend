@@ -58,13 +58,13 @@ export default function SideMenu() {
         </li>
         <li>
           <NavLink
-            to="/contacts"
+            to="/clients"
             className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
               return isActive ? "active" : isPending ? "pending" : ""
             }}
           >
             <IoMdContacts />
-            <span>Contacts</span>{" "}
+            <span>Clients</span>{" "}
           </NavLink>
         </li>
         <li>
