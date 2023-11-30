@@ -2,6 +2,7 @@ import { useState } from "react"
 import "./FilterInvoice.scss"
 import Select from "react-select"
 import { TiDocumentAdd } from "react-icons/ti"
+import { makeAPIcall } from "../../../Utils/API"
 
 export default function RecentInvoices() {
   const [invoicesPeriod, setInvoicesPeriod] = useState<string | number | undefined>("")
@@ -10,6 +11,10 @@ export default function RecentInvoices() {
     { value: 7, label: "Last 7 days" },
     { value: 30, label: "Last month" },
   ]
+
+  const testApi = () => {
+    makeAPIcall("testr", "GET")
+  }
 
   return (
     <div className="filterInvoice">
@@ -34,7 +39,7 @@ export default function RecentInvoices() {
           }}
         />
         {invoicesPeriod}
-        <button>
+        <button onClick={testApi}>
           <span>New</span> <TiDocumentAdd />
         </button>
       </div>

@@ -1,3 +1,5 @@
+@import "../../../assets/scss/colors.scss";
+
 .filterInvoice {
   label {
     font-size: 14px;
@@ -13,7 +15,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #08afc9;
+      background: $primaryColor;
       color: #ffffff;
       font-weight: 500;
       font-size: 16px;
