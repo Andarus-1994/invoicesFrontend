@@ -10,18 +10,20 @@ export default function InvoicesList({ invoices, selectInvoice }: InvoicesListPr
   return (
     <>
       <div className="invoicesList">
-        {invoices.map((invoice) => {
-          return (
-            <div className="invoiceItem" onClick={() => selectInvoice(invoice)} key={invoice.id}>
-              <div className="client">
-                <span>{invoice.client}</span> <span>$ {invoice.amount}</span>
+        <div className="scrollbar">
+          {invoices.map((invoice) => {
+            return (
+              <div className="invoiceItem" onClick={() => selectInvoice(invoice)} key={invoice.id}>
+                <div className="client">
+                  <span>{invoice.client}</span> <span>$ {invoice.amount}</span>
+                </div>
+                <div className="details">
+                  <span>{invoice.date_created}</span> <span> Sent</span>
+                </div>
               </div>
-              <div className="details">
-                <span>{invoice.date_created}</span> <span> Sent</span>
-              </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </>
   )
