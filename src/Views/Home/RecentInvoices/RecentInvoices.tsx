@@ -3,11 +3,16 @@ import InvoicesList from "./InvoicesList"
 import InvoiceDetailsCard from "../../../Components/Invoice/InvoiceDetailsCard"
 import FilterInvoice from "./FilterInvoice"
 import { InvoiceType } from "../../../Components/Types/Invoice"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useState, useCallback, Fragment } from "react"
+import { makeAPIcall } from "../../../Utils/API"
+import Skeleton from "react-loading-skeleton"
+import "react-loading-skeleton/dist/skeleton.css"
 
 export default function RecentInvoices() {
   const [selectInvoice, setSelectInvoice] = useState<null | InvoiceType>(null)
-
+  const [invoices, setInvoices] = useState<InvoiceType[]>([])
+  const [loadingInvoices, setLoadingInvoices] = useState(false)
+  // data for test
   const InvoicesArray: InvoiceType[] = useMemo(() => {
     return [
       { id: 1, name: "Electricity  Bill", client: "Electron Plus", amount: 2500, date_created: "23/12/2023" },
@@ -20,10 +25,23 @@ export default function RecentInvoices() {
     ]
   }, [])
 
-  useEffect(() => {
-    const initialInvoice = InvoicesArray[0]
-    setSelectInvoice(initialInvoice)
+  const fetchAllInvoices = useCallback(async () => {
+    setLoadingInvoices(true)
+    const response = await makeAPIcall("/invoices/getAll", "GET")
+    if (response.error) {
+      setInvoices(InvoicesArray)
+      setSelectInvoice(InvoicesArray[0])
+    } else {
+      setSelectInvoice(response.results[0])
+      setInvoices(response.results)
+    }
+    setLoadingInvoices(false)
   }, [InvoicesArray])
+
+  useEffect(() => {
+    console.log(invoices.length)
+    if (invoices.length === 0) fetchAllInvoices()
+  }, [fetchAllInvoices, invoices.length])
 
   const selectInvoiceFunction = (value: InvoiceType) => {
     setSelectInvoice(value)
@@ -31,13 +49,22 @@ export default function RecentInvoices() {
 
   return (
     <>
-      <div className="recentInvoices">
-        <div>
-          <FilterInvoice />
-          <InvoicesList invoices={InvoicesArray} selectInvoice={selectInvoiceFunction} />
+      {loadingInvoices ? (
+        <>
+          <Skeleton count={1} height={70} width={350} />
+          <Skeleton count={1} height={"100%"} width={450} />
+        </>
+      ) : (
+        <div className="recentInvoices">
+          <Fragment>
+            <div>
+              <FilterInvoice />
+              <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} />
+            </div>
+            <InvoiceDetailsCard invoice={selectInvoice} />
+          </Fragment>
         </div>
-        <InvoiceDetailsCard invoice={selectInvoice} />
-      </div>
+      )}
     </>
   )
 }
