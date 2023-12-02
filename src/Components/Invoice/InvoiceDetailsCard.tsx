@@ -6,7 +6,15 @@ interface InvoiceProps {
 }
 
 export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
-  if (invoice === null) return <div>Select an invoice</div>
+  if (invoice === null)
+    return (
+      <div className="containerDetails">
+        {" "}
+        <div className="invoiceDetails" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+          Select an invoice
+        </div>
+      </div>
+    )
 
   return (
     <div className="containerDetails">

@@ -30,7 +30,7 @@ export default function RecentInvoices() {
     const response = await makeAPIcall("/invoices/getAll", "GET")
     if (response.error) {
       setInvoices(InvoicesArray)
-      setSelectInvoice(InvoicesArray[0])
+      // setSelectInvoice(InvoicesArray[0])
     } else {
       setSelectInvoice(response.results[0])
       setInvoices(response.results)
@@ -52,7 +52,7 @@ export default function RecentInvoices() {
       {loadingInvoices ? (
         <>
           <Skeleton count={1} height={70} width={350} />
-          <Skeleton count={1} height={"100%"} width={450} />
+          <Skeleton count={1} height={"100%"} width={500} />
         </>
       ) : (
         <div className="recentInvoices">
