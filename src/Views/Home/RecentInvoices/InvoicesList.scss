@@ -7,7 +7,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  height: calc(100% - 70px);
+  max-height: calc(100% - 100px);
 
   .scrollbar {
     overflow: auto;
@@ -43,15 +43,22 @@
     }
     .details {
       display: flex;
-      justify-content: space-between;
-      span:nth-child(1) {
+      gap: 10px;
+      align-items: center;
+      span:nth-child(2) {
         color: $grayFadeText;
         font-size: 14px;
+        border-left: 2px solid $borderColor;
+        padding-left: 10px;
       }
-      span:nth-child(2) {
+      span:nth-child(1),
+      span:nth-child(3) {
         color: $primaryColor;
         text-transform: uppercase;
         font-size: 12px;
+      }
+      span:nth-child(3) {
+        margin-left: auto;
       }
     }
   }

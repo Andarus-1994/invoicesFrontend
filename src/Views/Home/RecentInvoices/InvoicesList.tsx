@@ -18,6 +18,7 @@ export default function InvoicesList({ invoices, selectInvoice }: InvoicesListPr
                   <span onClick={() => selectInvoice(invoice)}>{invoice.client}</span> <span>$ {invoice.amount}</span>
                 </div>
                 <div className="details">
+                  <span>INV-{invoice.id}</span>
                   <span>{invoice.date_created}</span> <span> Sent</span>
                 </div>
               </div>

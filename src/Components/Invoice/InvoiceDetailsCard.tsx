@@ -6,6 +6,21 @@ interface InvoiceProps {
 }
 
 export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
+  const formatCurrency = (number: string | number) => {
+    let numberType = number
+
+    if (!isNaN(Number(number))) {
+      numberType = parseFloat(String(number))
+    }
+
+    return numberType.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
+  }
+
   if (invoice === null)
     return (
       <div className="containerDetails">
@@ -27,7 +42,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             <h4>Invoice : {invoice.id}</h4>
             <div className="labelValue">
               <label className="gray-text">Invoice Number</label>
-              {invoice.name}
+              {invoice.id}
             </div>
             <div className="labelValue">
               <label className="gray-text">Issue Date</label>
@@ -42,24 +57,24 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
         <div className="bottomDetails">
           <div>
             <div className="gray-text">Client</div>
-            <h4>Digital Electron</h4>
-            <p className="gray-text">Thomas Edison</p>
-            <div className="address gray-text">Address of actual client here, with more details</div>
+            <h4>{invoice.client}</h4>
+            <p className="gray-text">{invoice.name}</p>
+            <div className="address gray-text">{invoice.client_address}</div>
           </div>
           <div>
             <div>
-              <div className="gray-text">Total Amountd</div>
-              <p>$ 2.240.00</p>
+              <div className="gray-text">Total Amount</div>
+              <p>{formatCurrency(invoice.amount)}</p>
             </div>
             <div>
               <div className="gray-text">Amount Paid</div>
-              <p>$ 0.00</p>
+              <p>{formatCurrency(0)}</p>
             </div>
           </div>
           <div>
             <div>
               <div className="gray-text">Ballance Due</div>
-              <p>$ 2.240.00</p>
+              <p> {formatCurrency(invoice.amount)}</p>
             </div>
             <div>
               <div className="gray-text">Due Date</div>

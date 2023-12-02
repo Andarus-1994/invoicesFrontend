@@ -15,13 +15,62 @@ export default function RecentInvoices() {
   // data for test
   const InvoicesArray: InvoiceType[] = useMemo(() => {
     return [
-      { id: 1, name: "Electricity  Bill", client: "Electron Plus", amount: 2500, date_created: "23/12/2023" },
-      { id: 2, name: "Invoice 245", client: "Bill Bro", amount: 1200, date_created: "15/11/2023" },
-      { id: 3, name: "Water Bill", client: "Water Well", amount: 1750, date_created: "29/08/2023" },
-      { id: 4, name: "Internet Bill", client: "Internet Univ LTD", amount: 50, date_created: "23/08/2023" },
-      { id: 5, name: "Internet Bill", client: "Internet Univ LTD", amount: 50, date_created: "23/08/2023" },
-      { id: 6, name: "Internet Bill", client: "Internet Univ LTD", amount: 50, date_created: "23/08/2023" },
-      { id: 7, name: "Internet Bill", client: "Internet Univ LTD", amount: 50, date_created: "23/08/2023" },
+      {
+        id: 1,
+        name: "Electricity  Bill",
+        client: "Electron Plus",
+        client_address: "Test Address for client, more details test",
+        amount: 2500,
+        date_created: "23/12/2023",
+      },
+      {
+        id: 2,
+        name: "Invoice 245",
+        client: "Bill Bro",
+        client_address: "Test Add ress132  for client, more details test",
+        amount: 1200,
+        date_created: "15/11/2023",
+      },
+      {
+        id: 3,
+        name: "Water Bill",
+        client: "Water Well",
+        client_address: "Test Address 3 for client, more details test",
+        amount: 1750,
+        date_created: "29/08/2023",
+      },
+      {
+        id: 4,
+        name: "Internet Bill",
+        client: "Internet Univ LTD",
+        client_address: "Test Address 3for client, more details test",
+        amount: 50,
+        date_created: "23/08/2023",
+      },
+      {
+        id: 5,
+        name: "Internet Bill",
+        client: "Internet Univ LTD",
+        client_address: "Test Address 34 for client, more details test",
+        amount: 50,
+        date_created: "23/08/2023",
+      },
+      {
+        id: 6,
+        name: "Internet Bill",
+        client: "Internet Univ LTD",
+        client_address: "Test Address 2  for client, more details test",
+        amount: 50,
+        date_created: "23/08/2023",
+      },
+      {
+        id: 7,
+        name: "Internet Bill",
+        client: "Internet Univ LTD",
+        client_address: "Test Address3 4 for client, more details test",
+        amount: 50,
+        date_created: "23/08/2023",
+      },
     ]
   }, [])
 
@@ -52,7 +101,7 @@ export default function RecentInvoices() {
       {loadingInvoices ? (
         <>
           <Skeleton count={1} height={70} width={350} />
-          <Skeleton count={1} height={"100%"} width={500} />
+          <Skeleton count={1} height={"85%"} width={500} />
         </>
       ) : (
         <div className="recentInvoices">

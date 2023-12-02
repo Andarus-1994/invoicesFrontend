@@ -22,26 +22,28 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     list-style-type: none;
     background: $primaryColor;
     min-height: 60dvh;
     border-radius: 10px;
-    padding: 50px 10px;
+    padding: 50px 30px;
     margin: 0;
   }
   a {
     color: #ffffff;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 16px;
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: flex-start;
-    gap: 5px;
+    gap: 15px;
     transition: 0.5s;
+    span {
+      display: none;
+    }
     svg {
-      font-size: 20px;
+      font-size: 25px;
     }
     &:hover {
       color: #1c1f1b;
