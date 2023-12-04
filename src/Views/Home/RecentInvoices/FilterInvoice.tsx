@@ -1,19 +1,22 @@
-import { useState } from "react"
 import "./FilterInvoice.scss"
 import Select from "react-select"
 import { TiDocumentAdd } from "react-icons/ti"
-import { makeAPIcall } from "../../../Utils/API"
 
-export default function RecentInvoices() {
-  const [invoicesPeriod, setInvoicesPeriod] = useState<string | number | undefined>("")
+type FilterInvoiceProps = {
+  filterInvoices: (filter: string) => void
+}
+
+export default function FilterInvoice({ filterInvoices }: FilterInvoiceProps) {
   const filterInvoicesOptions = [
     { value: "", label: "All" },
     { value: 7, label: "Last 7 days" },
     { value: 30, label: "Last month" },
+    { value: 60, label: "Last 2 months" },
   ]
 
-  const testApi = () => {
-    makeAPIcall("testr", "GET")
+  const filterEvent = async (filter: string) => {
+    console.log("test")
+    filterInvoices(filter)
   }
 
   return (
@@ -25,7 +28,7 @@ export default function RecentInvoices() {
           placeholder="Time Period"
           onChange={(event) => {
             console.log(event)
-            setInvoicesPeriod(event?.value)
+            if (event?.value !== undefined) filterEvent(event?.value.toString())
           }}
           styles={{
             control: (baseStyles) => ({
@@ -38,8 +41,7 @@ export default function RecentInvoices() {
             }),
           }}
         />
-        {invoicesPeriod}
-        <button onClick={testApi}>
+        <button>
           <span>New</span> <TiDocumentAdd />
         </button>
       </div>

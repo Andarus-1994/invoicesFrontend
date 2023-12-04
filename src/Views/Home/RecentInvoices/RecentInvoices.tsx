@@ -7,75 +7,19 @@ import { useEffect, useMemo, useState, useCallback, Fragment } from "react"
 import { makeAPIcall } from "../../../Utils/API"
 import Skeleton from "react-loading-skeleton"
 import "react-loading-skeleton/dist/skeleton.css"
+import { invoicesArray } from "../../../Data/Invoices"
 
 export default function RecentInvoices() {
   const [selectInvoice, setSelectInvoice] = useState<null | InvoiceType>(null)
   const [invoices, setInvoices] = useState<InvoiceType[]>([])
-  const [loadingInvoices, setLoadingInvoices] = useState(false)
+  const [loadingPage, setloadingPage] = useState(false)
   // data for test
   const InvoicesArray: InvoiceType[] = useMemo(() => {
-    return [
-      {
-        id: 1,
-        name: "Electricity  Bill",
-        client: "Electron Plus",
-        client_address: "Test Address for client, more details test",
-        amount: 2500,
-        date_created: "23/12/2023",
-      },
-      {
-        id: 2,
-        name: "Invoice 245",
-        client: "Bill Bro",
-        client_address: "Test Add ress132  for client, more details test",
-        amount: 1200,
-        date_created: "15/11/2023",
-      },
-      {
-        id: 3,
-        name: "Water Bill",
-        client: "Water Well",
-        client_address: "Test Address 3 for client, more details test",
-        amount: 1750,
-        date_created: "29/08/2023",
-      },
-      {
-        id: 4,
-        name: "Internet Bill",
-        client: "Internet Univ LTD",
-        client_address: "Test Address 3for client, more details test",
-        amount: 50,
-        date_created: "23/08/2023",
-      },
-      {
-        id: 5,
-        name: "Internet Bill",
-        client: "Internet Univ LTD",
-        client_address: "Test Address 34 for client, more details test",
-        amount: 50,
-        date_created: "23/08/2023",
-      },
-      {
-        id: 6,
-        name: "Internet Bill",
-        client: "Internet Univ LTD",
-        client_address: "Test Address 2  for client, more details test",
-        amount: 50,
-        date_created: "23/08/2023",
-      },
-      {
-        id: 7,
-        name: "Internet Bill",
-        client: "Internet Univ LTD",
-        client_address: "Test Address3 4 for client, more details test",
-        amount: 50,
-        date_created: "23/08/2023",
-      },
-    ]
+    return invoicesArray
   }, [])
 
   const fetchAllInvoices = useCallback(async () => {
-    setLoadingInvoices(true)
+    setloadingPage(true)
     const response = await makeAPIcall("/invoices/getAll", "GET")
     if (response.error) {
       setInvoices(InvoicesArray)
@@ -84,21 +28,30 @@ export default function RecentInvoices() {
       setSelectInvoice(response.results[0])
       setInvoices(response.results)
     }
-    setLoadingInvoices(false)
+    setloadingPage(false)
   }, [InvoicesArray])
 
   useEffect(() => {
-    console.log(invoices.length)
-    if (invoices.length === 0) fetchAllInvoices()
-  }, [fetchAllInvoices, invoices.length])
+    fetchAllInvoices()
+  }, [fetchAllInvoices])
 
   const selectInvoiceFunction = (value: InvoiceType) => {
     setSelectInvoice(value)
   }
 
+  const filterInvoices = async (filter: string) => {
+    setSelectInvoice(null)
+    console.log(filter)
+    const postData = {
+      period: filter,
+    }
+    const response = await makeAPIcall("/invoices/filter", "POST", postData)
+    if (!response.error) setInvoices(response.results)
+  }
+
   return (
     <>
-      {loadingInvoices ? (
+      {loadingPage ? (
         <>
           <Skeleton count={1} height={70} width={350} />
           <Skeleton count={1} height={"85%"} width={500} />
@@ -107,7 +60,7 @@ export default function RecentInvoices() {
         <div className="recentInvoices">
           <Fragment>
             <div>
-              <FilterInvoice />
+              <FilterInvoice filterInvoices={filterInvoices} />
               <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} />
             </div>
             <InvoiceDetailsCard invoice={selectInvoice} />

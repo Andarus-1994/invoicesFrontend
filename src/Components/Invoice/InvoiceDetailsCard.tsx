@@ -1,5 +1,6 @@
 import "./InvoiceDetailsCard.scss"
 import { InvoiceType } from "../Types/Invoice"
+import { formatDate } from "../../Utils/DateFormat"
 
 interface InvoiceProps {
   invoice: InvoiceType | null
@@ -46,7 +47,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             </div>
             <div className="labelValue">
               <label className="gray-text">Issue Date</label>
-              {invoice.date_created}
+              {formatDate(invoice.issue_date)}
             </div>
           </div>
           <div className="client">
@@ -78,7 +79,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             </div>
             <div>
               <div className="gray-text">Due Date</div>
-              <p>30/12/2023</p>
+              <p>{formatDate(invoice.due_date)}</p>
             </div>
           </div>
         </div>
