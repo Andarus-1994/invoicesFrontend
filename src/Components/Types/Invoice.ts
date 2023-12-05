@@ -1,9 +1,10 @@
 export type InvoiceType = {
-  id: number
+  id: string
   name: string
-  client: string
   amount: number | string
   issue_date: string
   due_date: string
-  client_address: string
+  client?: string
+  client_id?: string | number
+  client_address?: string
 }

@@ -28,8 +28,8 @@
       transition: 0.5s;
       &:hover {
         background: #ffffff;
-        border: 1px solid #08afc9;
-        color: #08afc9;
+        border: 1px solid $primaryColor;
+        color: $primaryColor;
         padding: 1px 14px;
       }
       svg {
