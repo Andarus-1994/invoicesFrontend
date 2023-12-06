@@ -13,6 +13,7 @@ export default function RecentInvoices() {
   const [selectInvoice, setSelectInvoice] = useState<null | InvoiceType>(null)
   const [invoices, setInvoices] = useState<InvoiceType[]>([])
   const [loadingPage, setloadingPage] = useState(false)
+  const [loadingInvoices, setLoadingInvoices] = useState(false)
   // data for test
   const InvoicesArray: InvoiceType[] = useMemo(() => {
     return invoicesArray
@@ -40,6 +41,7 @@ export default function RecentInvoices() {
   }
 
   const filterInvoices = async (filter: string) => {
+    setLoadingInvoices(true)
     setSelectInvoice(null)
     console.log(filter)
     const postData = {
@@ -47,6 +49,7 @@ export default function RecentInvoices() {
     }
     const response = await makeAPIcall("/invoices/filter", "POST", postData)
     if (!response.error) setInvoices(response.results)
+    setLoadingInvoices(false)
   }
 
   return (
@@ -61,7 +64,7 @@ export default function RecentInvoices() {
           <Fragment>
             <div>
               <FilterInvoice filterInvoices={filterInvoices} />
-              <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} />
+              <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} loading={loadingInvoices} />
             </div>
             <InvoiceDetailsCard invoice={selectInvoice} />
           </Fragment>

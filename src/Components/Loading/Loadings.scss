@@ -1,0 +1,25 @@
+.loadingSpinner {
+  background: #8080804d;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    font-size: 40px;
+    animation: rotateSpinner 1s infinite linear;
+  }
+}
+
+@keyframes rotateSpinner {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

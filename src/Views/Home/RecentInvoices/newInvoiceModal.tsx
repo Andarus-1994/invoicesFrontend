@@ -3,6 +3,9 @@ import "./FilterInvoice.scss"
 import "./newInvoiceModal.scss"
 import Select from "react-select"
 import { InvoiceType } from "../../../Components/Types/Invoice"
+import MyDatePicker from "../../../Components/Datepicker/Datepicker"
+import OutlinedInput from "@mui/material/OutlinedInput"
+import InputLabel from "@mui/material/InputLabel"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -16,7 +19,17 @@ type ClientType = {
   company_address: string
 }
 export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvoiceModalProps) {
-  const [newInvoice, setNewInvoice] = useState<InvoiceType>({ id: "", name: "", amount: "", due_date: "", issue_date: "", client: "", client_id: "" })
+  const [newInvoice, setNewInvoice] = useState<InvoiceType>({
+    id: "",
+    name: "",
+    amount: "",
+    amount_paid: "",
+    due_date: "",
+    issue_date: "",
+    client: "",
+    client_id: "",
+    status: "",
+  })
   const clients: ClientType[] = [
     {
       id: "24",
@@ -50,14 +63,14 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     <>
       <div className="coverModal" onClick={closeModal}></div>
       <div className="newInvoiceModal">
-        <h3>Create new invoice will be here</h3>
+        <h3>New Invoice</h3>
         <div>
-          <label>Clients</label>
+          <label>Client</label>
           <Select
             options={clients}
             getOptionLabel={getOption}
             getOptionValue={getOption}
-            placeholder="Clients"
+            placeholder="Select a client"
             onChange={(event) => {
               console.log(event)
               if (event?.name !== undefined) setNewInvoice({ ...newInvoice, client: event?.name.toString(), client_id: event?.id.toString() })
@@ -74,7 +87,48 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             }}
           />
         </div>
-        <button onClick={refreshInvoices}>Create</button>
+
+        <InputLabel htmlFor="outlined-input" size="small">
+          Invoice Name
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-input"
+          color="primary"
+          size="small"
+          placeholder="ex: Electricity Bill"
+          sx={{ marginTop: "15px", width: "100%" }} // Add some margin to push the input down
+        />
+
+        <InputLabel htmlFor="outlined-input" size="small">
+          Amount $
+        </InputLabel>
+        <OutlinedInput
+          id="outlined-input"
+          color="primary"
+          size="small"
+          placeholder="244.50"
+          inputProps={{
+            inputMode: "numeric",
+            pattern: "[0-9]*",
+          }}
+          sx={{ marginTop: "15px", marginBottom: "35px", width: "100%" }} // Add some margin to push the input down
+        />
+
+        <div style={{ display: "flex", gap: "20px" }}>
+          <MyDatePicker
+            label={"Issue Date"}
+            setDate={(dateValueString) => {
+              setNewInvoice({ ...newInvoice, issue_date: dateValueString })
+            }}
+          />
+          <MyDatePicker
+            label={"Due Date"}
+            setDate={(dateValueString) => {
+              setNewInvoice({ ...newInvoice, issue_date: dateValueString })
+            }}
+          />
+        </div>
+        <button onClick={refreshInvoices}>Create Invoice</button>
       </div>
     </>
   )

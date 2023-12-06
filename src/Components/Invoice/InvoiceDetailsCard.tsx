@@ -1,6 +1,7 @@
 import "./InvoiceDetailsCard.scss"
 import { InvoiceType } from "../Types/Invoice"
 import { formatDate } from "../../Utils/DateFormat"
+import { RiSecurePaymentLine } from "react-icons/ri"
 
 interface InvoiceProps {
   invoice: InvoiceType | null
@@ -36,7 +37,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
     <div className="containerDetails">
       <div className="invoiceDetails">
         <div className="statusSide">
-          <span>Status : Sent</span> <button>Export</button>
+          <span>Status : {invoice.status}</span> <button>Export</button>
         </div>
         <div className="detailsSide">
           <div className="invoice">
@@ -84,6 +85,11 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
           </div>
         </div>
       </div>
+      {invoice.status === "In process" && (
+        <button>
+          {formatCurrency(invoice.amount)} - Pay <RiSecurePaymentLine />
+        </button>
+      )}
     </div>
   )
 }

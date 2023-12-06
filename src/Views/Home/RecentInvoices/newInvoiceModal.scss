@@ -9,13 +9,18 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
-  padding: 100px 50px;
+  padding: 30px 50px;
   background: rgb(255, 255, 255);
   z-index: 30;
   animation: fade-in 1s;
-
-  button {
+  .MuiInputBase-root {
+    border-radius: 10px;
+  }
+  label {
+    color: black;
+    font-family: "Asap", sans-serif;
+  }
+  > button {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -30,6 +35,7 @@
     padding: 10px 15px;
     width: fit-content;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+    margin-top: 50px;
     margin-left: auto;
     transition: 0.5s;
     &:hover {

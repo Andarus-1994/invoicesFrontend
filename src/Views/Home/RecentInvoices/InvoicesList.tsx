@@ -1,13 +1,15 @@
 import "./InvoicesList.scss"
 import { InvoiceType } from "../../../Components/Types/Invoice"
 import { formatDate } from "../../../Utils/DateFormat"
+import LoadingSpinner from "../../../Components/Loading/Loading"
 
 interface InvoicesListProps {
   invoices: InvoiceType[]
+  loading: boolean
   selectInvoice: (invoice: InvoiceType) => void
 }
 
-export default function InvoicesList({ invoices, selectInvoice }: InvoicesListProps) {
+export default function InvoicesList({ invoices, loading, selectInvoice }: InvoicesListProps) {
   const formatCurrency = (number: string | number) => {
     let numberType = number
 
@@ -26,6 +28,7 @@ export default function InvoicesList({ invoices, selectInvoice }: InvoicesListPr
   return (
     <>
       <div className="invoicesList">
+        {loading && <LoadingSpinner />}
         <div className="scrollbar">
           {invoices.length ? (
             invoices.map((invoice) => {
@@ -36,7 +39,7 @@ export default function InvoicesList({ invoices, selectInvoice }: InvoicesListPr
                   </div>
                   <div className="details">
                     <span>INV-{invoice.id}</span>
-                    <span>{formatDate(invoice.issue_date)}</span> <span> Sent</span>
+                    <span>{formatDate(invoice.issue_date)}</span> <span> {invoice.status}</span>
                   </div>
                 </div>
               )
