@@ -6,6 +6,7 @@ import { InvoiceType } from "../../../Components/Types/Invoice"
 import MyDatePicker from "../../../Components/Datepicker/Datepicker"
 import OutlinedInput from "@mui/material/OutlinedInput"
 import InputLabel from "@mui/material/InputLabel"
+import { LiaFileInvoiceDollarSolid } from "react-icons/lia"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -28,7 +29,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     issue_date: "",
     client: "",
     client_id: "",
-    status: "",
+    status: "In process",
   })
   const clients: ClientType[] = [
     {
@@ -63,6 +64,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     <>
       <div className="coverModal" onClick={closeModal}></div>
       <div className="newInvoiceModal">
+        <LiaFileInvoiceDollarSolid />
         <h3>New Invoice</h3>
         <div>
           <label>Client</label>
@@ -71,6 +73,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             getOptionLabel={getOption}
             getOptionValue={getOption}
             placeholder="Select a client"
+            menuPlacement="top"
             onChange={(event) => {
               console.log(event)
               if (event?.name !== undefined) setNewInvoice({ ...newInvoice, client: event?.name.toString(), client_id: event?.id.toString() })
@@ -78,11 +81,13 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
+                position: "relative",
                 minWidth: "220px",
                 padding: "0px 10px",
                 border: "none",
                 borderRadius: "10px",
                 boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.3)",
+                zIndex: "100",
               }),
             }}
           />
@@ -96,7 +101,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           color="primary"
           size="small"
           placeholder="ex: Electricity Bill"
-          sx={{ marginTop: "15px", width: "100%" }} // Add some margin to push the input down
+          sx={{ width: "100%" }} // Add some margin to push the input down
         />
 
         <InputLabel htmlFor="outlined-input" size="small">
@@ -111,7 +116,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             inputMode: "numeric",
             pattern: "[0-9]*",
           }}
-          sx={{ marginTop: "15px", marginBottom: "35px", width: "100%" }} // Add some margin to push the input down
+          sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
         />
 
         <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>

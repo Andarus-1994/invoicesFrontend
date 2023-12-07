@@ -8,5 +8,7 @@ export type InvoiceType = {
   client?: string
   client_id?: string | number
   client_address?: string
-  status: string
+  status: StatusInvoice
 }
+
+type StatusInvoice = "In process" | "Sent" | "Canceled" | ""

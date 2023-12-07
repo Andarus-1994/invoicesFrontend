@@ -12,9 +12,37 @@
   padding: 30px 50px;
   background: rgb(255, 255, 255);
   z-index: 30;
-  animation: fade-in 1s;
+  animation: fade-in 0.5s;
+  & > *:nth-child(odd):not(svg) {
+    opacity: 0;
+    animation: 0.5s fade-in-right forwards ease-out;
+  }
+  & > *:nth-child(even):not(svg) {
+    opacity: 0;
+    animation: 0.5s fade-in-left forwards ease-out;
+  }
+  @for $i from 1 through 10 {
+    $delay: 0.12s * $i;
+    & > *:nth-child(#{$i}):not(svg) {
+      animation-delay: $delay;
+    }
+  }
+  > svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 200px;
+    opacity: 0.05;
+    z-index: -1;
+    pointer-events: none;
+  }
+  h3 {
+    color: $primaryColor;
+  }
   .MuiInputBase-root {
     border-radius: 10px;
+    font-family: "Asap", sans-serif;
+    padding: 0 15px 0 5px;
   }
   label {
     color: black;
@@ -66,5 +94,32 @@
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes fade-in-left {
+  0% {
+    opacity: 0;
+    transform: translate(-50px, 70px);
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translate(50px, 70px);
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 }
