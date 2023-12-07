@@ -114,7 +114,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           sx={{ marginTop: "15px", marginBottom: "35px", width: "100%" }} // Add some margin to push the input down
         />
 
-        <div style={{ display: "flex", gap: "20px" }}>
+        <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
           <MyDatePicker
             label={"Issue Date"}
             setDate={(dateValueString) => {
