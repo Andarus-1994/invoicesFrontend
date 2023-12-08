@@ -32,7 +32,7 @@ export const invoicesArray: InvoiceType[] = [
     amount_paid: 300,
     issue_date: "29/08/2023",
     due_date: "02/01/2024",
-    status: "Sent",
+    status: "In process",
   },
   {
     id: 4,
@@ -40,7 +40,7 @@ export const invoicesArray: InvoiceType[] = [
     client: "Internet Univ LTD",
     client_address: "Test Address 3for client, more details test",
     amount: 502,
-    amount_paid: 300,
+    amount_paid: 502,
     issue_date: "23/08/2023",
     due_date: "02/01/2024",
     status: "Sent",
@@ -54,7 +54,7 @@ export const invoicesArray: InvoiceType[] = [
     amount_paid: 30,
     issue_date: "23/08/2023",
     due_date: "28/12/2023",
-    status: "Sent",
+    status: "In process",
   },
   {
     id: 6,
@@ -62,7 +62,7 @@ export const invoicesArray: InvoiceType[] = [
     client: "Internet Univ LTD",
     client_address: "Test Address 2  for client, more details test",
     amount: 50,
-    amount_paid: 30,
+    amount_paid: 50,
     issue_date: "23/08/2023",
     due_date: "26/12/2023",
     status: "Sent",
@@ -76,6 +76,6 @@ export const invoicesArray: InvoiceType[] = [
     amount_paid: 30,
     issue_date: "23/08/2023",
     due_date: "27/12/2023",
-    status: "Sent",
+    status: "In process",
   },
 ]

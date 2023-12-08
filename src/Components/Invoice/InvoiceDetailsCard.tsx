@@ -70,7 +70,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             </div>
             <div>
               <div className="gray-text">Amount Paid</div>
-              <p>{formatCurrency(0)}</p>
+              <p>{formatCurrency(invoice.amount_paid)}</p>
             </div>
           </div>
           <div>
@@ -87,7 +87,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
       </div>
       {invoice.status === "In process" && (
         <button>
-          {formatCurrency(invoice.amount)} - Pay <RiSecurePaymentLine />
+          {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))} - Pay <RiSecurePaymentLine />
         </button>
       )}
     </div>

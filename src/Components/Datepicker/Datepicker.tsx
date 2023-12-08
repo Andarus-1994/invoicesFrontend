@@ -26,7 +26,6 @@ export default function MyDatePicker({ label, setDate }: DatePickerProps) {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
         label={label}
-        className="datepicker"
         format="DD/MM/YYYY"
         value={selectedDate}
         onChange={handleDateChange}

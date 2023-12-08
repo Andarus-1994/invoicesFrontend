@@ -28,8 +28,8 @@ export default function FilterInvoice({ filterInvoices }: FilterInvoiceProps) {
     setShowNewInvoiceModal(true)
   }
 
-  const refreshInvoices = () => {
-    filterInvoices(filterValue)
+  const refreshInvoices = async () => {
+    await filterInvoices(filterValue)
   }
 
   return (

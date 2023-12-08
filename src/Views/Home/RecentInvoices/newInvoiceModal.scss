@@ -48,10 +48,22 @@
     color: black;
     font-family: "Asap", sans-serif;
   }
-  > button {
+  .footer {
+    display: flex;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    > p {
+      min-height: 25px;
+    }
+  }
+
+  .footer > button {
+    position: relative;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background: $primaryColor;
     color: #ffffff;
@@ -61,11 +73,13 @@
     border: 1px solid transparent;
     border-radius: 5px;
     padding: 10px 15px;
-    width: fit-content;
+    min-width: 160px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-    margin-top: 50px;
-    margin-left: auto;
     transition: 0.5s;
+    &.disabled {
+      pointer-events: none;
+      background: #3fda99;
+    }
     &:hover {
       background: #ffffff;
       color: $primaryColor;

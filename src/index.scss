@@ -11,6 +11,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.MuiButtonBase-root,
+.MuiPickersCalendarHeader-labelContainer {
+  font-family: "Asap", sans-serif !important;
+}
+
+.error {
+  font-size: 14px;
+  color: #ec1616;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
