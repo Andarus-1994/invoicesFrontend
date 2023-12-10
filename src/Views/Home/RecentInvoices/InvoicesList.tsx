@@ -2,6 +2,7 @@ import "./InvoicesList.scss"
 import { InvoiceType } from "../../../Components/Types/Invoice"
 import { formatDate } from "../../../Utils/DateFormat"
 import LoadingSpinner from "../../../Components/Loading/Loading"
+import { FaCheckCircle } from "react-icons/fa"
 
 interface InvoicesListProps {
   invoices: InvoiceType[]
@@ -35,7 +36,10 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
               return (
                 <div className="invoiceItem" key={invoice.id}>
                   <div className="client">
-                    <span onClick={() => selectInvoice(invoice)}>{invoice.client}</span> <span> {formatCurrency(invoice.amount)}</span>
+                    <span onClick={() => selectInvoice(invoice)}>
+                      {invoice.client} {invoice.status === "Sent" && <FaCheckCircle />}
+                    </span>{" "}
+                    <span> {formatCurrency(invoice.amount)}</span>
                   </div>
                   <div className="details">
                     <span>INV-{invoice.id}</span>

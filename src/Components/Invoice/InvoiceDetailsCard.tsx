@@ -9,13 +9,14 @@ interface InvoiceProps {
 
 export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
   const formatCurrency = (number: string | number) => {
-    let numberType = number
+    let numberValue = number
 
     if (!isNaN(Number(number))) {
-      numberType = parseFloat(String(number))
+      numberValue = parseFloat(String(number))
     }
+    if (!number) numberValue = 0
 
-    return numberType.toLocaleString("en-US", {
+    return numberValue.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 2,
@@ -76,7 +77,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
           <div>
             <div>
               <div className="gray-text">Ballance Due</div>
-              <p> {formatCurrency(invoice.amount)}</p>
+              <p> {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))}</p>
             </div>
             <div>
               <div className="gray-text">Due Date</div>

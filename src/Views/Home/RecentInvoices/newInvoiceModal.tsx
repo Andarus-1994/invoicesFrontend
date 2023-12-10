@@ -10,6 +10,7 @@ import InputLabel from "@mui/material/InputLabel"
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia"
 import LoadingSpinner from "../../../Components/Loading/Loading"
 import { makeAPIcall } from "../../../Utils/API"
+import { formatDate } from "../../../Utils/DateFormat"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -33,32 +34,32 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     amount: "",
     amount_paid: "",
     due_date: "",
-    issue_date: "",
+    issue_date: formatDate(),
     client: "",
     client_id: "",
     status: "In process",
   })
   const clients: ClientType[] = [
     {
-      id: "24",
+      id: "1",
       name: "Victor Houdini",
       address: "Test Address",
       company_address: "Company address, test for sure",
     },
     {
-      id: "34",
+      id: "2",
       name: "Alissa Houdini",
       address: "No name Address",
       company_address: "Company address 44, test for sure",
     },
     {
-      id: "45",
+      id: "3",
       name: "Rick Minas",
       address: "No name Address 2",
       company_address: "Company address 44, test for sure",
     },
     {
-      id: "45",
+      id: "4",
       name: "Thomas Edison",
       address: "No name Address 2",
       company_address: "Company address 44, test for sure",
@@ -91,8 +92,10 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     console.log(response)
     if (response.error) {
       setError(response.errorObject.message)
+    } else {
+      closeModal()
+      refreshInvoices()
     }
-    refreshInvoices()
     setLoading(false)
   }
 
@@ -136,7 +139,6 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             }}
           />
         </div>
-
         <InputLabel htmlFor="outlined-input" size="small">
           Invoice Name
         </InputLabel>
@@ -150,7 +152,6 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           onChange={handleInputChange}
           sx={{ width: "100%" }} // Add some margin to push the input down
         />
-
         <InputLabel htmlFor="outlined-input" size="small">
           Amount
         </InputLabel>
@@ -166,19 +167,20 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           endAdornment={<InputAdornment position="end">$</InputAdornment>}
           sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
         />
-
         <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
           <MyDatePicker
             label={"Issue Date"}
             setDate={(dateValueString) => {
               setNewInvoice({ ...newInvoice, issue_date: dateValueString })
             }}
+            value={newInvoice.issue_date}
           />
           <MyDatePicker
             label={"Due Date"}
             setDate={(dateValueString) => {
-              setNewInvoice({ ...newInvoice, issue_date: dateValueString })
+              setNewInvoice({ ...newInvoice, due_date: dateValueString })
             }}
+            value={newInvoice.due_date}
           />
         </div>
         <div className="footer">

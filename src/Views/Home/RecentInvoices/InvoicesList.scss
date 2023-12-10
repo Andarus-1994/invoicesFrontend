@@ -45,6 +45,9 @@
           color: $primaryColor;
         }
       }
+      svg {
+        color: $primaryColor;
+      }
     }
     .details {
       display: flex;
