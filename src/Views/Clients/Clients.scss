@@ -1,0 +1,31 @@
+@import "../../assets/scss/colors.scss";
+
+.clients {
+  display: flex;
+  flex-direction: column;
+  h3 {
+    color: $primaryColor;
+    font-size: 24px;
+    margin: 0 10px;
+  }
+  .actionsTable {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    svg {
+      cursor: pointer;
+      font-size: 22px;
+      color: $primaryColor;
+      transition: 0.5s;
+      &:hover {
+        color: black;
+      }
+    }
+  }
+  .loadingContainer {
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background: #fff;
+  }
+}
