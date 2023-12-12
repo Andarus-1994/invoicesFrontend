@@ -3,20 +3,30 @@
 .clients {
   display: flex;
   flex-direction: column;
-  h3 {
-    color: $primaryColor;
-    font-size: 24px;
-    margin: 0 10px;
+
+  .headerClients {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    h3 {
+      color: $primaryColor;
+      font-size: 24px;
+      margin: 0;
+    }
   }
   .actionsTable {
     display: flex;
-    gap: 10px;
+    gap: 20px;
     align-items: center;
     svg {
       cursor: pointer;
       font-size: 22px;
       color: $primaryColor;
       transition: 0.5s;
+      &.delete {
+        color: #f15454;
+      }
       &:hover {
         color: black;
       }

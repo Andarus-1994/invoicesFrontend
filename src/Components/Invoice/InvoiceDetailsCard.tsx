@@ -35,7 +35,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
     )
 
   return (
-    <div className="containerDetails">
+    <div className="containerDetails" key={invoice.id}>
       <div className="invoiceDetails">
         <div className="statusSide">
           <span>Status : {invoice.status}</span> <button>Export</button>
@@ -87,7 +87,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
         </div>
       </div>
       {invoice.status === "In process" && (
-        <button>
+        <button key={invoice.id}>
           {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))} - Pay <RiSecurePaymentLine />
         </button>
       )}

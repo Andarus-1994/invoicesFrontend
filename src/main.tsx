@@ -10,7 +10,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 const primary = {
   main: "#08afc9",
   light: "#08afc9",
-  dark: "#08afc9",
+  dark: "#328d9b",
   contrastText: "#fff",
 }
 

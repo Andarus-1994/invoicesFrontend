@@ -15,6 +15,9 @@ import { MdOutlineLocationCity } from "react-icons/md"
 import { MdDeleteSweep } from "react-icons/md"
 import { ClientsData } from "../../Data/Clients"
 import LoadingSpinner from "../../Components/Loading/Loading"
+import Pagination from "@mui/material/Pagination"
+import Button from "@mui/material/Button"
+import NewEditClient from "./NewOrEditClient"
 
 export default function Clients() {
   const [loading, setLoading] = useState(true)
@@ -55,17 +58,42 @@ export default function Clients() {
     border: "none",
     fontFamily: "'Asap', sans-serif",
     textTransform: "uppercase",
-    fontSize: "17px",
+    fontSize: "16px",
     fontWeight: "600",
+    padding: "10px 15px",
     background: "#eff7f9",
+  }
+
+  const handleChangePagination = (event: React.ChangeEvent<unknown>, value: number) => {
+    console.log(event)
+    console.log(value)
+  }
+
+  const [selectedClientObject, setSelectedClientObject] = useState({
+    showModal: false,
+    client: null,
+  })
+
+  const closeNewEditModal = () => {
+    setSelectedClientObject({ client: null, showModal: false })
+  }
+
+  const openNewEditModal = () => {
+    setSelectedClientObject({ client: null, showModal: true })
   }
 
   return (
     <div className="clients">
-      <h3>Clients details</h3>
+      {selectedClientObject.showModal && <NewEditClient client={selectedClientObject.client} close={closeNewEditModal} />}
+      <div className="headerClients">
+        <h3>Clients Details</h3>
+        <Button variant="contained" onClick={openNewEditModal}>
+          New Client
+        </Button>
+      </div>
 
       <div>
-        <TableContainer component={Paper} sx={{ boxShadow: "none", padding: "10px", background: "#fcfcfc" }}>
+        <TableContainer component={Paper} sx={{ boxShadow: "none", padding: "0 10px", background: "#fcfcfc" }}>
           <Table stickyHeader={true} sx={{ minWidth: 650, borderSpacing: "0 5px", zIndex: "1" }} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -82,7 +110,14 @@ export default function Clients() {
               </TableRow>
             </TableHead>
             <TableBody sx={{ position: "relative", minHeight: "300px" }}>
-              {loading && <LoadingSpinner />}
+              {loading && (
+                <tr>
+                  <td>
+                    {" "}
+                    <LoadingSpinner />
+                  </td>
+                </tr>
+              )}
               {clients.map((row) => (
                 <TableRow key={row.name} sx={{ boxShadow: "0 0 3px #e8e8e870", borderRadius: "10px", background: "#fff" }}>
                   <TableCell component="th" scope="row" sx={styleCell}>
@@ -94,7 +129,7 @@ export default function Clients() {
                   <TableCell sx={styleCell}>{row.company_address}</TableCell>
                   <TableCell sx={styleCell}>
                     <div className="actionsTable">
-                      <FaEdit /> <MdDeleteSweep />
+                      <FaEdit /> <MdDeleteSweep className="delete" />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -102,6 +137,10 @@ export default function Clients() {
             </TableBody>
           </Table>
         </TableContainer>
+        <br />
+        <div>
+          <Pagination sx={{ "& > ul": { justifyContent: "center" } }} count={1} page={1} onChange={handleChangePagination} />
+        </div>
       </div>
     </div>
   )

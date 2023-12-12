@@ -10,7 +10,7 @@ export const invoicesArray: InvoiceType[] = [
     amount_paid: 1300,
     issue_date: "23/12/2023",
     due_date: "29/12/2023",
-    status: "In process",
+    status: "Sent",
   },
   {
     id: 2,

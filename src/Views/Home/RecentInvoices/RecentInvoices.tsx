@@ -24,7 +24,6 @@ export default function RecentInvoices() {
     const response = await makeAPIcall("/invoices/getAll", "GET")
     if (response.error) {
       setInvoices(InvoicesArray)
-      // setSelectInvoice(InvoicesArray[0])
     } else {
       setSelectInvoice(response.results[0])
       setInvoices(response.results)
