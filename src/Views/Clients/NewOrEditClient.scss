@@ -12,6 +12,14 @@
   border-radius: 10px;
   box-shadow: 0 0 1px 1px #f8f8f8;
   animation: fade-in 0.8s;
+  & > svg {
+    position: absolute;
+    top: 25px;
+    right: 50px;
+    font-size: 100px;
+    color: $primaryColor;
+    opacity: 0.3;
+  }
   h3 {
     color: $primaryColor;
     font-size: 22px;

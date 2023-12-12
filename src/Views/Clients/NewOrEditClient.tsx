@@ -2,6 +2,7 @@ import { Client } from "../../Components/Types/Client"
 import "./NewOrEditClient.scss"
 import { useState } from "react"
 import Button from "@mui/material/Button"
+import { BsPersonRolodex } from "react-icons/bs"
 
 type PropNewEditClient = {
   client: Client | null
@@ -27,6 +28,7 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
     <>
       <div className="coverClientModal" onClick={close}></div>
       <div className="ClientModal">
+        <BsPersonRolodex />
         <h3>Add New Client (progress design) </h3>
         <div className="flex-row">
           <div className="flex-column gap-10">
