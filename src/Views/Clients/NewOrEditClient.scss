@@ -30,6 +30,10 @@
     font-weight: 600;
     color: #000000;
     padding: 2px 0px;
+    &.required:after {
+      content: " *";
+      color: red;
+    }
   }
   input,
   textarea {

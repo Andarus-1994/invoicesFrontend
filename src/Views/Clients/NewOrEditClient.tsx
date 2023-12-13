@@ -3,6 +3,7 @@ import "./NewOrEditClient.scss"
 import { useState } from "react"
 import Button from "@mui/material/Button"
 import { BsPersonRolodex } from "react-icons/bs"
+import { makeAPIcall } from "../../Utils/API"
 
 type PropNewEditClient = {
   client: Client | null
@@ -19,9 +20,21 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
     company_address: "",
   })
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newAmount = event.target.value
     setNewClient((prevClient) => ({ ...prevClient, [event.target.name]: newAmount }))
+  }
+
+  const handleSave = async () => {
+    const fieldsToValidate = (Object.keys(newClient) as (keyof Client)[]).filter((field) => field !== "id")
+    const isFormValid = fieldsToValidate.every((field) => newClient[field].trim() !== "")
+    if (isFormValid) {
+      console.log("make api call")
+      const response = await makeAPIcall("/clients/create", "POST", newClient)
+      if (!response.error) {
+        close()
+      }
+    }
   }
 
   return (
@@ -34,29 +47,29 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
           <div className="flex-column gap-10">
             <div className="flex-row">
               <div className="flex-column">
-                <label>Client Name</label>
+                <label className="required">Client Name</label>
                 <input placeholder="ex: Andrew " name="name" value={newClient.name} onChange={handleInputChange} />
               </div>
             </div>
             <div className="flex-row">
               <div className="flex-column">
-                <label>Client Address</label>
-                <textarea placeholder="ex: str Oxford nr 24 " name="name" value={newClient.name} />
+                <label className="required">Client Address</label>
+                <textarea placeholder="ex: str Oxford nr 24 " name="address" value={newClient.address} onChange={handleInputChange} />
               </div>
             </div>
           </div>
           <div className="flex-column gap-10">
             <div className="flex-row">
               <div className="flex-column">
-                <label>Company Name</label>
-                <input placeholder="ex: Andrew " name="name" value={newClient.name} onChange={handleInputChange} />
+                <label className="required">Company Name</label>
+                <input placeholder="ex: Andrew " name="company_name" value={newClient.company_name} onChange={handleInputChange} />
               </div>
             </div>
 
             <div className="flex-row">
               <div className="flex-column">
-                <label>Company Address</label>
-                <textarea placeholder="ex: Company street " name="name" value={newClient.name} />
+                <label className="required">Company Address</label>
+                <textarea placeholder="ex: Company street " name="company_address" value={newClient.company_address} onChange={handleInputChange} />
               </div>
             </div>
           </div>
@@ -66,7 +79,7 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
           <Button onClick={close} variant="outlined" color="error" sx={{ display: "block", marginTop: "30px" }}>
             Cancel
           </Button>
-          <Button variant="contained" sx={{ display: "block", marginLeft: "auto", marginTop: "30px" }}>
+          <Button onClick={handleSave} variant="contained" sx={{ display: "block", marginLeft: "auto", marginTop: "30px" }}>
             Save Client
           </Button>
         </div>
