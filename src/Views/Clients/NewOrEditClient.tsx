@@ -19,6 +19,8 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
     company_name: "",
     company_address: "",
   })
+  const [error, setError] = useState("")
+  const [saveLoading, setSaveLoading] = useState(false)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newAmount = event.target.value
@@ -26,6 +28,8 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
   }
 
   const handleSave = async () => {
+    setError("")
+    setSaveLoading(true)
     const fieldsToValidate = (Object.keys(newClient) as (keyof Client)[]).filter((field) => field !== "id")
     const isFormValid = fieldsToValidate.every((field) => newClient[field].trim() !== "")
     if (isFormValid) {
@@ -34,7 +38,10 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
       if (!response.error) {
         close()
       }
+    } else {
+      setError("Please complete all fields.")
     }
+    setSaveLoading(false)
   }
 
   return (
@@ -42,19 +49,31 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
       <div className="coverClientModal" onClick={close}></div>
       <div className="ClientModal">
         <BsPersonRolodex />
-        <h3>Add New Client (progress design) </h3>
+        <h3>Add New Client </h3>
         <div className="flex-row">
           <div className="flex-column gap-10">
             <div className="flex-row">
               <div className="flex-column">
                 <label className="required">Client Name</label>
-                <input placeholder="ex: Andrew " name="name" value={newClient.name} onChange={handleInputChange} />
+                <input
+                  className={error && !newClient.name ? "error-input" : ""}
+                  placeholder="ex: Andrew "
+                  name="name"
+                  value={newClient.name}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
             <div className="flex-row">
               <div className="flex-column">
                 <label className="required">Client Address</label>
-                <textarea placeholder="ex: str Oxford nr 24 " name="address" value={newClient.address} onChange={handleInputChange} />
+                <textarea
+                  className={error && !newClient.address ? "error-input" : ""}
+                  placeholder="ex: str Oxford nr 24 "
+                  name="address"
+                  value={newClient.address}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
           </div>
@@ -62,14 +81,26 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
             <div className="flex-row">
               <div className="flex-column">
                 <label className="required">Company Name</label>
-                <input placeholder="ex: Andrew " name="company_name" value={newClient.company_name} onChange={handleInputChange} />
+                <input
+                  className={error && !newClient.company_name ? "error-input" : ""}
+                  placeholder="ex: Andrew "
+                  name="company_name"
+                  value={newClient.company_name}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
 
             <div className="flex-row">
               <div className="flex-column">
                 <label className="required">Company Address</label>
-                <textarea placeholder="ex: Company street " name="company_address" value={newClient.company_address} onChange={handleInputChange} />
+                <textarea
+                  className={error && !newClient.company_address ? "error-input" : ""}
+                  placeholder="ex: Company street "
+                  name="company_address"
+                  value={newClient.company_address}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
           </div>
@@ -79,7 +110,8 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
           <Button onClick={close} variant="outlined" color="error" sx={{ display: "block", marginTop: "30px" }}>
             Cancel
           </Button>
-          <Button onClick={handleSave} variant="contained" sx={{ display: "block", marginLeft: "auto", marginTop: "30px" }}>
+          <span className="error">{error}</span>
+          <Button disabled={saveLoading} onClick={handleSave} variant="contained" sx={{ display: "block", marginLeft: "auto", marginTop: "30px" }}>
             Save Client
           </Button>
         </div>
