@@ -5,13 +5,12 @@
   background: #fff;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
   z-index: 11;
   padding: 20px 40px;
   padding-top: 20px;
   border-radius: 10px;
   box-shadow: 0 0 1px 1px #f8f8f8;
-  animation: fade-in 0.8s;
+  animation: fade-in-new-client 0.8s forwards;
   & > svg {
     position: absolute;
     top: 25px;
@@ -54,7 +53,7 @@
       box-shadow: 0 0 1px 1px rgba(59, 62, 65, 0.5);
     }
     &.error-input {
-      box-shadow: 0 -1px 2px 0px red;
+      border: 0.5px solid #ec1616;
     }
   }
   .flex-row {
@@ -86,4 +85,17 @@
   top: 0;
   background: rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+@keyframes fade-in-new-client {
+  0% {
+    opacity: 0;
+    translate: 60% -100%;
+    scale: 0.3;
+  }
+  100% {
+    translate: -50% -50%;
+    scale: 1;
+    opacity: 1;
+  }
 }

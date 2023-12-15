@@ -4,15 +4,14 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 30px 50px;
-  background: rgb(255, 255, 255);
+  background: #ffffff;
   z-index: 30;
-  animation: fade-in 0.5s ease-out;
+  animation: fade-in-new-invoice 0.8s forwards;
   & > *:nth-child(odd):not(svg) {
     opacity: 0;
     animation: 0.5s fade-in-right forwards ease-out;
@@ -22,7 +21,7 @@
     animation: 0.5s fade-in-left forwards ease-out;
   }
   @for $i from 1 through 10 {
-    $delay: 0.1s * $i;
+    $delay: 0.6s + 0.1s * $i;
     & > *:nth-child(#{$i}):not(svg) {
       animation-delay: $delay;
     }
@@ -38,6 +37,8 @@
   }
   h3 {
     color: $primaryColor;
+    font-size: 24px;
+    margin-top: 0;
   }
   .MuiInputBase-root {
     border-radius: 10px;
@@ -45,8 +46,46 @@
     padding: 0 15px 0 5px;
   }
   label {
-    color: black;
+    color: #3e3e44;
+    font-weight: 500;
     font-family: "Asap", sans-serif;
+  }
+  .amountInput {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    > div {
+      width: 100%;
+    }
+    button {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+      color: #0000009a;
+      font-weight: 500;
+      font-size: 16px;
+      font-family: "Asap", sans-serif;
+      border: 1px solid #0000003b;
+      border-radius: 5px;
+      padding: 10px 15px;
+      white-space: nowrap;
+      transition: 0.5s;
+      &.disabled {
+        pointer-events: none;
+        background: #3fda99;
+      }
+      &:hover {
+        background: #fdfbfb;
+        color: $primaryColor;
+        border: 1px solid $primaryColor;
+      }
+      svg {
+        font-size: 20px;
+      }
+    }
   }
   .footer {
     display: flex;
@@ -89,6 +128,46 @@
       font-size: 20px;
     }
   }
+  @keyframes fade-in-new-invoice {
+    0% {
+      opacity: 0;
+      translate: -100% -100%;
+      scale: 0.3;
+    }
+    100% {
+      translate: -50% -50%;
+      scale: 1;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-in-left {
+    0% {
+      opacity: 0;
+      transform: translate(-50px, 70px);
+    }
+    70% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes fade-in-right {
+    0% {
+      opacity: 0;
+      transform: translate(50px, 70px);
+    }
+    70% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
 }
 
 .coverModal {
@@ -99,42 +178,4 @@
   height: 100dvh;
   width: 100dvw;
   z-index: 20;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: scale(0.7) translate(-70%, -70%);
-  }
-  100% {
-    transform: scale(1) translate(-50%, -50%);
-    opacity: 1;
-  }
-}
-@keyframes fade-in-left {
-  0% {
-    opacity: 0;
-    transform: translate(-50px, 70px);
-  }
-  70% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes fade-in-right {
-  0% {
-    opacity: 0;
-    transform: translate(50px, 70px);
-  }
-  70% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
 }

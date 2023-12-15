@@ -53,8 +53,8 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             </div>
           </div>
           <div className="client">
-            <h4>{invoice.client}</h4>
-            <p className="gray-text">244 W Ashland Ave Street, Test Louiseville, new Year station 245, by the bridges</p>
+            <h4>{invoice.company_name}</h4>
+            <p className="gray-text">{invoice.company_address}</p>
           </div>
         </div>
         <div className="bottomDetails">
@@ -62,7 +62,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
             <div className="gray-text">Client</div>
             <h4>{invoice.client}</h4>
             <p className="gray-text">{invoice.name}</p>
-            <div className="address gray-text">{invoice.client_address}</div>
+            <div className="address gray-text">{invoice.address}</div>
           </div>
           <div>
             <div>

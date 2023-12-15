@@ -7,7 +7,9 @@ export type InvoiceType = {
   due_date: string
   client?: string
   client_id?: string | number
-  client_address?: string
+  address?: string
+  company_name: string
+  company_address: string
   status: StatusInvoice
 }
 

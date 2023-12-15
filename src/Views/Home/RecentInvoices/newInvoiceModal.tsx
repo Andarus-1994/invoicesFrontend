@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react"
-import "./FilterInvoice.scss"
 import "./newInvoiceModal.scss"
 import Select from "react-select"
 import { InvoiceType } from "../../../Components/Types/Invoice"
@@ -11,6 +10,7 @@ import { LiaFileInvoiceDollarSolid } from "react-icons/lia"
 import LoadingSpinner from "../../../Components/Loading/Loading"
 import { makeAPIcall } from "../../../Utils/API"
 import { formatDate } from "../../../Utils/DateFormat"
+import ItemsInvoice from "./ItemsInvoice"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -31,12 +31,15 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   const [newInvoice, setNewInvoice] = useState<InvoiceType>({
     id: "",
     name: "",
-    amount: "",
+    amount: "0",
     amount_paid: "",
     due_date: "",
     issue_date: formatDate(),
     client: "",
     client_id: "",
+    address: "",
+    company_name: "",
+    company_address: "",
     status: "In process",
   })
   const clients: ClientType[] = [
@@ -107,6 +110,8 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
 
   const getOption = (client: ClientType) => client.name
 
+  const [showItemsModal, setShowItemsModal] = useState(false)
+
   return (
     <>
       <div className="coverModal" onClick={closeModal}></div>
@@ -152,21 +157,26 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           onChange={handleInputChange}
           sx={{ width: "100%" }} // Add some margin to push the input down
         />
-        <InputLabel htmlFor="outlined-input" size="small">
-          Amount
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-input"
-          color="primary"
-          size="small"
-          name="amount"
-          placeholder="244.50"
-          value={newInvoice.amount}
-          onBlur={handleAmountBlur}
-          onChange={handleInputChange}
-          endAdornment={<InputAdornment position="end">$</InputAdornment>}
-          sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
-        />
+        <div className="amountInput">
+          <div>
+            <InputLabel htmlFor="outlined-input" size="small" sx={{ bottom: "16px" }}>
+              Amount
+            </InputLabel>
+            <OutlinedInput
+              id="outlined-input"
+              color="primary"
+              size="small"
+              name="amount"
+              placeholder="244.50"
+              value={newInvoice.amount}
+              onBlur={handleAmountBlur}
+              onChange={handleInputChange}
+              endAdornment={<InputAdornment position="end">$</InputAdornment>}
+              sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
+            />
+          </div>
+          <button onClick={() => setShowItemsModal(true)}>Add Items (0)</button>
+        </div>
         <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
           <MyDatePicker
             label={"Issue Date"}
@@ -195,6 +205,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             )}
           </button>
         </div>
+        {showItemsModal && <ItemsInvoice />}
       </div>
     </>
   )

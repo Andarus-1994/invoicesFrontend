@@ -1,0 +1,66 @@
+@import "../../../assets/scss/colors.scss";
+
+.itemsInvoice {
+  position: absolute;
+  left: 102%;
+  top: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 50px;
+  min-height: 300px;
+  min-width: 400px;
+  white-space: nowrap;
+  animation: 0.5s fade-in-left forwards ease-out !important;
+  > p {
+    color: $primaryColor;
+    font-family: "Raleway", sans-serif;
+  }
+  .list-items-invoice {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e4e4e4;
+    font-family: "Asap", sans-serif;
+    .body-items-invoice {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 100px;
+      overflow: auto;
+    }
+    .row-item-invoice {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      &.header-item-invoice {
+        position: sticky;
+        border-bottom: 1px solid #e4e4e4;
+        margin-bottom: 10px;
+        > div {
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+      > div {
+        white-space: normal;
+        font-size: 12px;
+      }
+      > div:nth-of-type(1) {
+        width: 100px;
+        font-weight: 500;
+      }
+      > div:nth-of-type(2) {
+        width: 150px;
+      }
+      > div:nth-of-type(3) {
+        width: 80px;
+      }
+      > div:nth-of-type(4) {
+        width: 80px;
+      }
+    }
+  }
+}
