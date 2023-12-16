@@ -11,6 +11,7 @@ import LoadingSpinner from "../../../Components/Loading/Loading"
 import { makeAPIcall } from "../../../Utils/API"
 import { formatDate } from "../../../Utils/DateFormat"
 import ItemsInvoice from "./ItemsInvoice"
+import { ItemInvoiceType } from "../../../Components/Types/ItemInvoice"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -25,6 +26,24 @@ type ClientType = {
 }
 export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvoiceModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
+
+  // list of the Items for the modal
+  const [itemsInvoices, setItemsInvoices] = useState<ItemInvoiceType[]>([
+    {
+      id: "",
+      name: "Internet Cable Test",
+      description: "25 meters of cable v2.",
+      price: "24.33",
+      quantity: "25",
+    },
+    {
+      id: "",
+      name: "Internet Bill 3 Months Subscription",
+      description: "Paid 3 months in advance.",
+      price: "30.99",
+      quantity: "3",
+    },
+  ])
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -74,6 +93,12 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
       modalRef.current.focus()
     }
   }, [])
+
+  useEffect(() => {
+    console.log("testRender")
+    const amount = itemsInvoices.reduce((sum, item) => sum + Number(item.price), 0)
+    setNewInvoice((prevInvoice) => ({ ...prevInvoice, amount: amount.toFixed(2) }))
+  }, [itemsInvoices])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
@@ -175,7 +200,9 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
               sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
             />
           </div>
-          <button onClick={() => setShowItemsModal(!showItemsModal)}>Add Items (0)</button>
+          <button onClick={() => setShowItemsModal(!showItemsModal)}>
+            {showItemsModal ? "Hide" : "View"} Items ({itemsInvoices.length})
+          </button>
         </div>
         <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
           <MyDatePicker
@@ -205,7 +232,13 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             )}
           </button>
         </div>
-        {showItemsModal && <ItemsInvoice close={() => setShowItemsModal(false)} />}
+        {showItemsModal && (
+          <ItemsInvoice
+            setItem={(newItem) => setItemsInvoices([...itemsInvoices, newItem])}
+            items={itemsInvoices}
+            close={() => setShowItemsModal(false)}
+          />
+        )}
       </div>
     </>
   )

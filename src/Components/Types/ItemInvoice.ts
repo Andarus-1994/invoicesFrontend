@@ -1,4 +1,4 @@
-export type ItemInvoice = {
+export type ItemInvoiceType = {
   id: string | number
   name: string
   description: string
