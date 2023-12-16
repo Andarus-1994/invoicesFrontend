@@ -35,7 +35,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: 100px;
+      height: 100px;
       overflow: auto;
     }
     .row-item-invoice {
@@ -68,6 +68,45 @@
       }
       > div:nth-of-type(4) {
         width: 80px;
+      }
+    }
+  }
+  .formAddItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: end;
+    span {
+      font-size: 12px;
+      color: $grayFadeText;
+    }
+    .inputRow {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      input {
+        padding: 8px 7px;
+        font-family: "Asap", sans-serif;
+        border-radius: 10px;
+        border: 1px solid #cfcfcf;
+        width: 100%;
+        &:nth-of-type(2) {
+          width: 80px;
+        }
+        &:nth-of-type(3) {
+          width: 80px;
+        }
+      }
+    }
+    .textAreaRow {
+      width: 100%;
+      textarea {
+        padding: 8px 7px;
+        font-family: "Asap", sans-serif;
+        border-radius: 10px;
+        border: 1px solid #cfcfcf;
+        width: 100%;
+        resize: none;
       }
     }
   }

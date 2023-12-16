@@ -49,6 +49,10 @@
     color: #3e3e44;
     font-weight: 500;
     font-family: "Asap", sans-serif;
+    &.required:after {
+      content: " *";
+      color: red;
+    }
   }
   .amountInput {
     display: flex;

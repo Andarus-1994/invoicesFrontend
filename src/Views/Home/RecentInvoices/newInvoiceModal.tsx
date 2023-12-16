@@ -76,8 +76,8 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   }, [])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newAmount = event.target.value
-    setNewInvoice((prevInvoice) => ({ ...prevInvoice, [event.target.name]: newAmount }))
+    const newValue = event.target.value
+    setNewInvoice((prevInvoice) => ({ ...prevInvoice, [event.target.name]: newValue }))
   }
 
   const handleAmountBlur = () => {
@@ -119,7 +119,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
         <LiaFileInvoiceDollarSolid />
         <h3>New Invoice</h3>
         <div>
-          <label>Client</label>
+          <label className="required">Client</label>
           <Select
             options={clients}
             getOptionLabel={getOption}
@@ -144,7 +144,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             }}
           />
         </div>
-        <InputLabel htmlFor="outlined-input" size="small">
+        <InputLabel htmlFor="outlined-input" size="small" className="required">
           Invoice Name
         </InputLabel>
         <OutlinedInput
@@ -159,7 +159,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
         />
         <div className="amountInput">
           <div>
-            <InputLabel htmlFor="outlined-input" size="small" sx={{ bottom: "16px" }}>
+            <InputLabel htmlFor="outlined-input" size="small" sx={{ bottom: "16px" }} className="required">
               Amount
             </InputLabel>
             <OutlinedInput
@@ -175,7 +175,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
               sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
             />
           </div>
-          <button onClick={() => setShowItemsModal(true)}>Add Items (0)</button>
+          <button onClick={() => setShowItemsModal(!showItemsModal)}>Add Items (0)</button>
         </div>
         <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
           <MyDatePicker

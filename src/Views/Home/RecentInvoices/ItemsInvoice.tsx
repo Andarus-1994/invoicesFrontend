@@ -1,11 +1,59 @@
+import { useState } from "react"
 import "./ItemsInvoice.scss"
 import { IoCloseSharp } from "react-icons/io5"
+import { ItemInvoice } from "../../../Components/Types/ItemInvoice"
+import Button from "@mui/material/Button"
 
 type ItemsInvoiceProps = {
   close: () => void
 }
 export default function ItemsInvoice({ close }: ItemsInvoiceProps) {
-  console.log("invoices List")
+  const [itemsInvoices, setItemsInvoices] = useState<ItemInvoice[]>([])
+  const [newItem, setNewItem] = useState<ItemInvoice>({
+    id: "",
+    name: "",
+    description: "",
+    price: "",
+    quantity: "",
+  })
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = event.target.value
+    setNewItem((prevItem) => ({ ...prevItem, [event.target.name]: newValue }))
+  }
+
+  const addItemToList = () => {
+    const fieldsToValidate = (Object.keys(newItem) as (keyof ItemInvoice)[]).filter((field) => field !== "id")
+    const validationFields = fieldsToValidate.every((field) => newItem[field].toString().trim() !== "")
+    if (validationFields) {
+      setItemsInvoices([...itemsInvoices, newItem])
+      setNewItem({
+        id: "",
+        name: "",
+        description: "",
+        price: "",
+        quantity: "",
+      })
+    }
+  }
+
+  const handlepriceBlur = () => {
+    const cleanedAmount = newItem.price.replace(/[^0-9.]/g, "")
+    let formattedAmount = parseFloat(cleanedAmount).toFixed(2)
+
+    if (isNaN(Number(formattedAmount))) formattedAmount = "0"
+    setNewItem((prevItem) => ({ ...prevItem, price: formattedAmount }))
+  }
+
+  const handleQtyBlur = () => {
+    let clearQty = newItem.quantity.replace(/[^\d.]/g, "")
+    clearQty = clearQty.split(".")[0]
+    if (clearQty === "" || isNaN(Number(clearQty))) {
+      clearQty = "0"
+    }
+    setNewItem((prevItem) => ({ ...prevItem, quantity: clearQty }))
+  }
+
   return (
     <div className="itemsInvoice">
       <IoCloseSharp className="close-icon" onClick={close} />
@@ -18,27 +66,33 @@ export default function ItemsInvoice({ close }: ItemsInvoiceProps) {
           <div>Price</div>
         </div>
         <div className="body-items-invoice">
-          <div className="row-item-invoice">
-            <div>Internet Bill</div>
-            <div>Monthly payment for the internet bill.</div>
-            <div>1</div>
-            <div>34.50 $</div>
-          </div>
-          <div className="row-item-invoice">
-            <div>Cable Internet Plus</div>
-            <div>Monthly payment for the internet cable plus.</div>
-            <div>1</div>
-            <div>10.50 $</div>
-          </div>
-          <div className="row-item-invoice">
-            <div>Router Rent</div>
-            <div>Payment for renting the Router for 3 months.</div>
-            <div>1</div>
-            <div>45.99 $</div>
-          </div>
+          {!itemsInvoices.length ? (
+            <div style={{ textAlign: "center" }}>No items added</div>
+          ) : (
+            itemsInvoices.map((item, index) => {
+              return (
+                <div className="row-item-invoice" key={item.name + index}>
+                  <div>{item.name}</div>
+                  <div>{item.description}</div>
+                  <div>{item.quantity}</div>
+                  <div>{item.price} $</div>
+                </div>
+              )
+            })
+          )}
         </div>
       </div>
-      <div>Here will be the form for add</div>
+      <div className="formAddItem">
+        <div className="inputRow">
+          <input name="name" placeholder="Name" value={newItem.name} onChange={handleInputChange} />
+          <input name="price" placeholder="Price" onBlur={handlepriceBlur} value={newItem.price} onChange={handleInputChange} />
+          <input name="quantity" onBlur={handleQtyBlur} placeholder="Qty" value={newItem.quantity} onChange={handleInputChange} />
+        </div>
+        <div className="textAreaRow">
+          <textarea name="description" placeholder="Description" value={newItem.description} onChange={handleInputChange} rows={3} />
+        </div>
+        <span>All fields are required</span> <Button onClick={addItemToList}>Add Item</Button>
+      </div>
     </div>
   )
 }
