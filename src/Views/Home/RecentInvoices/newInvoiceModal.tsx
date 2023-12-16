@@ -205,7 +205,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             )}
           </button>
         </div>
-        {showItemsModal && <ItemsInvoice />}
+        {showItemsModal && <ItemsInvoice close={() => setShowItemsModal(false)} />}
       </div>
     </>
   )

@@ -1,9 +1,14 @@
 import "./ItemsInvoice.scss"
+import { IoCloseSharp } from "react-icons/io5"
 
-export default function ItemsInvoice() {
+type ItemsInvoiceProps = {
+  close: () => void
+}
+export default function ItemsInvoice({ close }: ItemsInvoiceProps) {
   console.log("invoices List")
   return (
     <div className="itemsInvoice">
+      <IoCloseSharp className="close-icon" onClick={close} />
       <p>Items added so far</p>
       <div className="list-items-invoice">
         <div className="row-item-invoice header-item-invoice">
