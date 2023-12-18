@@ -51,7 +51,7 @@
     font-family: "Asap", sans-serif;
     &.required:after {
       content: " *";
-      color: red;
+      color: $errorColor;
     }
   }
   .amountInput {
@@ -78,8 +78,8 @@
       white-space: nowrap;
       transition: 0.5s;
       &.error {
-        border: 1px solid #f84343;
-        color: #f84343;
+        border: 1px solid $errorColor;
+        color: $errorColor;
       }
       &.disabled {
         pointer-events: none;

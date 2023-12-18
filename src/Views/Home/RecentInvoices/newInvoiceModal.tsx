@@ -162,7 +162,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
                 position: "relative",
                 minWidth: "220px",
                 padding: "0px 10px",
-                border: "none",
+                border: error && !newInvoice.client_id ? "1px solid #d33030" : "none",
                 borderRadius: "10px",
                 boxShadow: "0px 0px 3px rgba(0, 0, 0, 0.3)",
                 zIndex: "100",
@@ -187,7 +187,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
         <div className="amountInput">
           <div>
             <InputLabel htmlFor="outlined-input" size="small" sx={{ bottom: "16px" }} className="required">
-              Amount
+              Total Amount
             </InputLabel>
             <OutlinedInput
               id="outlined-input"

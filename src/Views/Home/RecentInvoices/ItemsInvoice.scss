@@ -11,13 +11,6 @@
   min-width: 400px;
   white-space: nowrap;
   animation: fade-in-modal-items 1s forwards !important;
-  .close-icon {
-    cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 24px;
-  }
   > p {
     color: $primaryColor;
     font-family: "Raleway", sans-serif;
