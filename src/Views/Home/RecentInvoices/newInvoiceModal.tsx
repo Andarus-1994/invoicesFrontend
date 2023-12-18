@@ -7,6 +7,7 @@ import OutlinedInput from "@mui/material/OutlinedInput"
 import InputAdornment from "@mui/material/InputAdornment"
 import InputLabel from "@mui/material/InputLabel"
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia"
+import { IoCloseSharp } from "react-icons/io5"
 import LoadingSpinner from "../../../Components/Loading/Loading"
 import { makeAPIcall } from "../../../Utils/API"
 import { formatDate } from "../../../Utils/DateFormat"
@@ -28,22 +29,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   const modalRef = useRef<HTMLDivElement>(null)
 
   // list of the Items for the modal
-  const [itemsInvoices, setItemsInvoices] = useState<ItemInvoiceType[]>([
-    {
-      id: "",
-      name: "Internet Cable Test",
-      description: "25 meters of cable v2.",
-      price: "24.33",
-      quantity: "25",
-    },
-    {
-      id: "",
-      name: "Internet Bill 3 Months Subscription",
-      description: "Paid 3 months in advance.",
-      price: "30.99",
-      quantity: "3",
-    },
-  ])
+  const [itemsInvoices, setItemsInvoices] = useState<ItemInvoiceType[]>([])
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
@@ -114,10 +100,17 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   }
 
   const createInvoice = async () => {
+    const DataObject = { ...newInvoice, items: itemsInvoices }
+    const validation = checkValidationFields(DataObject)
+
+    if (!validation) {
+      setError("Please complete all the fields.")
+      return
+    }
     setError("")
     setLoading(true)
-    const response = await makeAPIcall("/invoices/create", "POST", newInvoice)
-    console.log(response)
+    const response = await makeAPIcall("/invoices/create", "POST", DataObject)
+
     if (response.error) {
       setError(response.errorObject.message)
     } else {
@@ -125,6 +118,13 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
       refreshInvoices()
     }
     setLoading(false)
+  }
+
+  const checkValidationFields = (objectInvoice: { items: ItemInvoiceType[] } & InvoiceType) => {
+    const fieldsToValidate: (keyof typeof objectInvoice)[] = ["name", "client_id", "issue_date", "due_date", "items", "amount"]
+    const validation = fieldsToValidate.every((field) => (field === "items" ? objectInvoice[field].length : objectInvoice[field] !== ""))
+
+    return validation
   }
 
   const handleEscClose = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -141,6 +141,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     <>
       <div className="coverModal" onClick={closeModal}></div>
       <div className="newInvoiceModal" onKeyDown={handleEscClose} tabIndex={0} ref={modalRef}>
+        <IoCloseSharp className="close-icon" onClick={closeModal} />
         <LiaFileInvoiceDollarSolid />
         <h3>New Invoice</h3>
         <div>
@@ -193,6 +194,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
               size="small"
               name="amount"
               placeholder="244.50"
+              disabled={true}
               value={newInvoice.amount}
               onBlur={handleAmountBlur}
               onChange={handleInputChange}

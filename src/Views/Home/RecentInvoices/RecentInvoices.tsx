@@ -25,8 +25,10 @@ export default function RecentInvoices() {
     if (response.error) {
       setInvoices(InvoicesArray)
     } else {
-      setSelectInvoice(response.results[0])
-      setInvoices(response.results)
+      if (response.results.length) {
+        setSelectInvoice(response.results[0])
+        setInvoices(response.results)
+      }
     }
     setloadingPage(false)
   }, [InvoicesArray])
@@ -35,20 +37,21 @@ export default function RecentInvoices() {
     fetchAllInvoices()
   }, [fetchAllInvoices])
 
-  const selectInvoiceFunction = (value: InvoiceType) => {
-    setSelectInvoice(value)
-  }
-
   const filterInvoices = async (filter: string) => {
     setLoadingInvoices(true)
     setSelectInvoice(null)
-    console.log(filter)
+
     const postData = {
       period: filter,
     }
     const response = await makeAPIcall("/invoices/filter", "POST", postData)
     if (!response.error) setInvoices(response.results)
     setLoadingInvoices(false)
+  }
+
+  // passing it as a prop for invoicesList to change the current invoice
+  const selectInvoiceFunction = (value: InvoiceType) => {
+    setSelectInvoice(value)
   }
 
   return (
