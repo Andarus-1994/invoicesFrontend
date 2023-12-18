@@ -77,6 +77,10 @@
       padding: 10px 15px;
       white-space: nowrap;
       transition: 0.5s;
+      &.error {
+        border: 1px solid #f84343;
+        color: #f84343;
+      }
       &.disabled {
         pointer-events: none;
         background: #3fda99;

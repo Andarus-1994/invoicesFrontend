@@ -177,6 +177,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
           id="outlined-input"
           color="primary"
           size="small"
+          error={!!error && !newInvoice.name}
           placeholder="ex: Electricity Bill"
           name="name"
           value={newInvoice.name}
@@ -202,7 +203,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
               sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
             />
           </div>
-          <button onClick={() => setShowItemsModal(!showItemsModal)}>
+          <button onClick={() => setShowItemsModal(!showItemsModal)} className={error && newInvoice.amount === "0.00" ? "error" : ""}>
             {showItemsModal ? "Hide" : "View"} Items ({itemsInvoices.length})
           </button>
         </div>
@@ -212,6 +213,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             setDate={(dateValueString) => {
               setNewInvoice({ ...newInvoice, issue_date: dateValueString })
             }}
+            error={!!error && !newInvoice.issue_date}
             value={newInvoice.issue_date}
           />
           <MyDatePicker
@@ -219,6 +221,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             setDate={(dateValueString) => {
               setNewInvoice({ ...newInvoice, due_date: dateValueString })
             }}
+            error={!!error && !newInvoice.due_date}
             value={newInvoice.due_date}
           />
         </div>

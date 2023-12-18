@@ -4,16 +4,18 @@ import dayjs from "dayjs"
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { DatePicker } from "@mui/x-date-pickers/DatePicker"
 import { formatDate } from "../../Utils/DateFormat"
+import "./Datepicker.scss"
 
 type DatePickerProps = {
   label: string
   value: string
+  error?: boolean
   setDate: (date: string) => void
 }
 
 type DatePickerFormat = dayjs.Dayjs | null
 
-export default function MyDatePicker({ label, value, setDate }: DatePickerProps) {
+export default function MyDatePicker({ label, value, error, setDate }: DatePickerProps) {
   const [selectedDate, setSelectedDate] = React.useState<DatePickerFormat>(null)
 
   const handleDateChange = (date: DatePickerFormat) => {
@@ -37,6 +39,7 @@ export default function MyDatePicker({ label, value, setDate }: DatePickerProps)
         value={selectedDate}
         onChange={handleDateChange}
         sx={{ width: "100%" }}
+        className={error ? "error" : ""}
         slotProps={{
           textField: { size: "small" },
           actionBar: {
