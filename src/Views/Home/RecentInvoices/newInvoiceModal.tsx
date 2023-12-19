@@ -5,7 +5,6 @@ import { InvoiceType } from "../../../Components/Types/Invoice"
 import MyDatePicker from "../../../Components/Datepicker/Datepicker"
 import OutlinedInput from "@mui/material/OutlinedInput"
 import InputAdornment from "@mui/material/InputAdornment"
-import InputLabel from "@mui/material/InputLabel"
 import { LiaFileInvoiceDollarSolid } from "react-icons/lia"
 import { IoCloseSharp } from "react-icons/io5"
 import LoadingSpinner from "../../../Components/Loading/Loading"
@@ -170,25 +169,22 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             }}
           />
         </div>
-        <InputLabel htmlFor="outlined-input" size="small" className="required">
-          Invoice Name
-        </InputLabel>
-        <OutlinedInput
-          id="outlined-input"
-          color="primary"
-          size="small"
-          error={!!error && !newInvoice.name}
-          placeholder="ex: Electricity Bill"
-          name="name"
-          value={newInvoice.name}
-          onChange={handleInputChange}
-          sx={{ width: "100%" }} // Add some margin to push the input down
-        />
-        <div className="amountInput">
-          <div>
-            <InputLabel htmlFor="outlined-input" size="small" sx={{ bottom: "16px" }} className="required">
-              Total Amount
-            </InputLabel>
+        <div className="inputLabelBox">
+          <label className="required">Invoice Name</label>
+          <OutlinedInput
+            id="outlined-input"
+            color="primary"
+            size="small"
+            error={!!error && !newInvoice.name}
+            placeholder="ex: Electricity Bill"
+            name="name"
+            value={newInvoice.name}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="inputAmountInvoice">
+          <div className="inputLabelBox">
+            <label className="required">Total Amount</label>
             <OutlinedInput
               id="outlined-input"
               color="primary"
@@ -200,14 +196,17 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
               onBlur={handleAmountBlur}
               onChange={handleInputChange}
               endAdornment={<InputAdornment position="end">$</InputAdornment>}
-              sx={{ marginBottom: "25px", width: "100%" }} // Add some margin to push the input down
+              sx={{ marginBottom: "25px", width: "50%" }} // Add some margin to push the input down
             />
           </div>
-          <button onClick={() => setShowItemsModal(!showItemsModal)} className={error && newInvoice.amount === "0.00" ? "error" : ""}>
-            {showItemsModal ? "Hide" : "View"} Items ({itemsInvoices.length})
-          </button>
+          <div className="inputLabelBox">
+            <span>* 1 Item minimum</span>
+            <button onClick={() => setShowItemsModal(!showItemsModal)} className={error && newInvoice.amount === "0.00" ? "error" : ""}>
+              {showItemsModal ? "Hide" : "View"} Items ({itemsInvoices.length})
+            </button>
+          </div>
         </div>
-        <div style={{ display: "flex", gap: "20px", maxWidth: "400px" }}>
+        <div style={{ display: "flex", gap: "20px" }}>
           <MyDatePicker
             label={"Issue Date"}
             setDate={(dateValueString) => {

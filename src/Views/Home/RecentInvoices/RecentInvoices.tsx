@@ -10,7 +10,7 @@ import "react-loading-skeleton/dist/skeleton.css"
 import { invoicesArray } from "../../../Data/Invoices"
 
 export default function RecentInvoices() {
-  const [selectInvoice, setSelectInvoice] = useState<null | InvoiceType>(null)
+  const [selectedInvoice, setSelectedInvoice] = useState<null | InvoiceType>(null)
   const [invoices, setInvoices] = useState<InvoiceType[]>([])
   const [loadingPage, setloadingPage] = useState(false)
   const [loadingInvoices, setLoadingInvoices] = useState(false)
@@ -26,7 +26,7 @@ export default function RecentInvoices() {
       setInvoices(InvoicesArray)
     } else {
       if (response.results.length) {
-        setSelectInvoice(response.results[0])
+        setSelectedInvoice(response.results[0])
         setInvoices(response.results)
       }
     }
@@ -39,7 +39,7 @@ export default function RecentInvoices() {
 
   const filterInvoices = async (filter: string) => {
     setLoadingInvoices(true)
-    setSelectInvoice(null)
+    setSelectedInvoice(null)
 
     const postData = {
       period: filter,
@@ -51,7 +51,7 @@ export default function RecentInvoices() {
 
   // passing it as a prop for invoicesList to change the current invoice
   const selectInvoiceFunction = (value: InvoiceType) => {
-    setSelectInvoice(value)
+    setSelectedInvoice(value)
   }
 
   return (
@@ -68,7 +68,7 @@ export default function RecentInvoices() {
               <FilterInvoice filterInvoices={filterInvoices} />
               <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} loading={loadingInvoices} />
             </div>
-            <InvoiceDetailsCard invoice={selectInvoice} />
+            <InvoiceDetailsCard invoice={selectedInvoice} />
           </Fragment>
         </div>
       )}

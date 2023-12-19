@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 5px;
   padding: 30px 50px;
   background: #ffffff;
   z-index: 30;
@@ -54,12 +55,19 @@
       color: $errorColor;
     }
   }
-  .amountInput {
+  .inputLabelBox {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+  }
+  .inputAmountInvoice {
+    display: flex;
+    justify-content: space-between;
     gap: 10px;
-    > div {
-      width: 100%;
+    span {
+      margin-top: 10px;
+      color: $grayFadeText;
+      font-size: 12px;
+      text-align: center;
     }
     button {
       position: relative;
@@ -74,7 +82,7 @@
       font-family: "Asap", sans-serif;
       border: 1px solid #0000003b;
       border-radius: 5px;
-      padding: 10px 15px;
+      padding: 8px 15px;
       white-space: nowrap;
       transition: 0.5s;
       &.error {
