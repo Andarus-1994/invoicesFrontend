@@ -36,4 +36,11 @@ export const ClientsData: Client[] = [
     company_name: "Electricty Comp",
     company_address: "Denmark, Esbjerg N, Brogade 48",
   },
+  {
+    id: "52",
+    name: "Pen Badgey",
+    address: "UK, London Sides, OffSpring Street, Alley 44, B2",
+    company_name: "The Film Makers",
+    company_address: "UK, London Sides, OffSpring Street, Alley 44, B5",
+  },
 ]

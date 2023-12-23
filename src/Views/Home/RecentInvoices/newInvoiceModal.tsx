@@ -12,6 +12,7 @@ import { makeAPIcall } from "../../../Utils/API"
 import { formatDate } from "../../../Utils/DateFormat"
 import ItemsInvoice from "./ItemsInvoice"
 import { ItemInvoiceType } from "../../../Components/Types/ItemInvoice"
+import { ClientsData } from "../../../Data/Clients"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -46,44 +47,28 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     company_address: "",
     status: "In process",
   })
-  const clients: ClientType[] = [
-    {
-      id: "1",
-      name: "Victor Houdini",
-      address: "Test Address",
-      company_address: "Company address, test for sure",
-    },
-    {
-      id: "2",
-      name: "Alissa Houdini",
-      address: "No name Address",
-      company_address: "Company address 44, test for sure",
-    },
-    {
-      id: "3",
-      name: "Rick Minas",
-      address: "No name Address 2",
-      company_address: "Company address 44, test for sure",
-    },
-    {
-      id: "4",
-      name: "Thomas Edison",
-      address: "No name Address 2",
-      company_address: "Company address 44, test for sure",
-    },
-  ]
+  const [clients, setClients] = useState<ClientType[]>([])
 
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.focus()
     }
+    getClientsForSelectOptions()
   }, [])
 
   useEffect(() => {
-    console.log("testRender")
     const amount = itemsInvoices.reduce((sum, item) => sum + Number(item.price), 0)
     setNewInvoice((prevInvoice) => ({ ...prevInvoice, amount: amount.toFixed(2) }))
   }, [itemsInvoices])
+
+  const getClientsForSelectOptions = async () => {
+    const response = await makeAPIcall("/clients/getAll", "GET")
+    if (!response.error) {
+      setClients(response.results)
+    } else {
+      setClients(ClientsData)
+    }
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
@@ -152,7 +137,6 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
             placeholder="Select a client"
             menuPlacement="top"
             onChange={(event) => {
-              console.log(event)
               if (event?.name !== undefined) setNewInvoice({ ...newInvoice, client: event?.name.toString(), client_id: event?.id.toString() })
             }}
             styles={{

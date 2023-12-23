@@ -2,6 +2,7 @@ import "./InvoiceDetailsCard.scss"
 import { InvoiceType } from "../Types/Invoice"
 import { formatDate } from "../../Utils/DateFormat"
 import { RiSecurePaymentLine } from "react-icons/ri"
+import { SVGInvoiceSelect } from "./svgInvoiceSelect"
 
 interface InvoiceProps {
   invoice: InvoiceType | null
@@ -28,7 +29,8 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
     return (
       <div className="containerDetails">
         {" "}
-        <div className="invoiceDetails" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className="invoiceDetails" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "20px" }}>
+          <SVGInvoiceSelect />
           Select an invoice
         </div>
       </div>
@@ -86,7 +88,7 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
           </div>
         </div>
       </div>
-      {invoice.status === "In process" && (
+      {Number(invoice.amount) - Number(invoice.amount_paid) !== 0 && invoice.status === "In process" && (
         <button key={invoice.id}>
           {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))} - Pay <RiSecurePaymentLine />
         </button>

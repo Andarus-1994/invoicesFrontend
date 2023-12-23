@@ -38,6 +38,9 @@
       display: flex;
       justify-content: space-between;
       span:nth-child(1) {
+        display: flex;
+        align-items: center;
+        gap: 5px;
         cursor: pointer;
         font-weight: 700;
         transition: 0.5s;
@@ -47,6 +50,17 @@
       }
       svg {
         color: $primaryColor;
+      }
+      span.expired {
+        color: $errorColor;
+        font-size: 13px;
+        &:hover {
+          color: $errorColor;
+        }
+        svg {
+          color: $errorColor;
+          font-size: 20px;
+        }
       }
     }
     .details {

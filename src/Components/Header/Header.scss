@@ -28,17 +28,49 @@
     top: 30px;
     width: 60%;
     opacity: 0.2;
+
     svg {
+      position: relative;
       width: 60px;
       margin-top: 20px;
+      opacity: 0;
+
       &:nth-of-type(even) {
-        transform: rotateZ(30deg);
         margin-top: 45px;
+        animation: 1s fade-in-icon-header-even forwards;
       }
       &:nth-of-type(odd) {
-        transform: rotateZ(-35deg);
         margin-top: 1px;
+        animation: 1s fade-in-icon-header-odd forwards;
       }
     }
+    @for $i from 1 through 10 {
+      $delay: 0.15s * $i;
+      & > svg:nth-child(#{$i}) {
+        animation-delay: $delay;
+      }
+    }
+  }
+}
+
+@keyframes fade-in-icon-header-even {
+  0% {
+    opacity: 0;
+    transform: translate(200px, 150px) rotateZ(-30deg) scale(3);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotateZ(30deg) scale(1);
+  }
+}
+
+@keyframes fade-in-icon-header-odd {
+  0% {
+    opacity: 0;
+    transform: translate(150px, 150px) rotateZ(35deg) scale(3);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) rotateZ(-35deg) scale(1);
   }
 }

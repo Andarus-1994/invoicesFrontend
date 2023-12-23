@@ -71,7 +71,7 @@ export default function Clients() {
 
   const [selectedClientObject, setSelectedClientObject] = useState({
     showModal: false,
-    client: null,
+    client: null as Client | null,
   })
 
   const closeNewEditModal = () => {
@@ -84,7 +84,9 @@ export default function Clients() {
 
   return (
     <div className="clients">
-      {selectedClientObject.showModal && <NewEditClient client={selectedClientObject.client} close={closeNewEditModal} />}
+      {selectedClientObject.showModal && (
+        <NewEditClient client={selectedClientObject.client} close={closeNewEditModal} refreshClients={fetchAllClients} />
+      )}
       <div className="headerClients">
         <h3>Clients Details</h3>
         <Button variant="contained" onClick={openNewEditModal}>
@@ -118,7 +120,7 @@ export default function Clients() {
                   </td>
                 </tr>
               )}
-              {clients.map((row) => (
+              {clients.map((row: Client) => (
                 <TableRow key={row.name} sx={{ boxShadow: "0 0 3px #e8e8e870", borderRadius: "10px", background: "#fff" }}>
                   <TableCell component="th" scope="row" sx={styleCell}>
                     {row.id}
@@ -129,7 +131,7 @@ export default function Clients() {
                   <TableCell sx={styleCell}>{row.company_address}</TableCell>
                   <TableCell sx={styleCell}>
                     <div className="actionsTable">
-                      <FaEdit /> <MdDeleteSweep className="delete" />
+                      <FaEdit onClick={() => setSelectedClientObject({ client: row, showModal: true })} /> <MdDeleteSweep className="delete" />
                     </div>
                   </TableCell>
                 </TableRow>

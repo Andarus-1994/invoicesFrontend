@@ -1,6 +1,6 @@
 import { Client } from "../../Components/Types/Client"
 import "./NewOrEditClient.scss"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "@mui/material/Button"
 import { BsPersonRolodex } from "react-icons/bs"
 import { makeAPIcall } from "../../Utils/API"
@@ -8,9 +8,10 @@ import { makeAPIcall } from "../../Utils/API"
 type PropNewEditClient = {
   client: Client | null
   close: () => void
+  refreshClients: () => void
 }
 
-export default function NewEditClient({ client, close }: PropNewEditClient) {
+export default function NewEditClient({ client, close, refreshClients }: PropNewEditClient) {
   console.log("1234", client)
   const [newClient, setNewClient] = useState<Client>({
     id: "",
@@ -21,6 +22,10 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
   })
   const [error, setError] = useState("")
   const [saveLoading, setSaveLoading] = useState(false)
+
+  useEffect(() => {
+    if (client) setNewClient(client)
+  }, [client])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newAmount = event.target.value
@@ -33,10 +38,12 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
     const fieldsToValidate = (Object.keys(newClient) as (keyof Client)[]).filter((field) => field !== "id")
     const isFormValid = fieldsToValidate.every((field) => newClient[field].trim() !== "")
     if (isFormValid) {
-      console.log("make api call")
-      const response = await makeAPIcall("/clients/create", "POST", newClient)
+      const url = newClient.id ? "/clients/update" : "/clients/create"
+      const response = await makeAPIcall(url, "POST", newClient)
+
       if (!response.error) {
         close()
+        refreshClients()
       }
     } else {
       setError("Please complete all fields.")
@@ -49,7 +56,7 @@ export default function NewEditClient({ client, close }: PropNewEditClient) {
       <div className="coverClientModal" onClick={close}></div>
       <div className="ClientModal">
         <BsPersonRolodex />
-        <h3>Add New Client </h3>
+        <h3>{newClient.id ? "Edit Client " : "Add New Client"}</h3>
         <div className="flex-row">
           <div className="flex-column gap-10">
             <div className="flex-row">

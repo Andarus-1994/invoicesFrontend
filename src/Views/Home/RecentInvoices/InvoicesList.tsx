@@ -3,6 +3,8 @@ import { InvoiceType } from "../../../Components/Types/Invoice"
 import { formatDate } from "../../../Utils/DateFormat"
 import LoadingSpinner from "../../../Components/Loading/Loading"
 import { FaCheckCircle } from "react-icons/fa"
+import { PiSealWarningBold } from "react-icons/pi"
+import moment from "moment"
 
 interface InvoicesListProps {
   invoices: InvoiceType[]
@@ -26,6 +28,14 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
     })
   }
 
+  const checkInvoiceExpiration = (invoiceParam: InvoiceType) => {
+    if (Number(invoiceParam.amount) - Number(invoiceParam.amount_paid) === 0) return false
+    if (invoiceParam.status === "Sent") return false
+    const today = moment()
+    const dueDate = moment(invoiceParam.due_date, "DD-MM-YYYY")
+    if (today.diff(dueDate) > 0) return true
+  }
+
   return (
     <>
       <div className="invoicesList">
@@ -38,6 +48,12 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
                   <div className="client">
                     <span onClick={() => selectInvoice(invoice)}>
                       {invoice.client} {invoice.status === "Sent" && <FaCheckCircle />}
+                      {checkInvoiceExpiration(invoice) && (
+                        <span className="expired">
+                          <PiSealWarningBold />
+                          {"Expired "}
+                        </span>
+                      )}
                     </span>{" "}
                     <span> {formatCurrency(invoice.amount)}</span>
                   </div>

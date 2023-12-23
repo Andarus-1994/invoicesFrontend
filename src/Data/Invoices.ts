@@ -10,8 +10,8 @@ export const invoicesArray: InvoiceType[] = [
     company_name: "EDF Energy V244",
     amount: 2500,
     amount_paid: 2500,
-    issue_date: "23/12/2023",
-    due_date: "29/12/2023",
+    issue_date: "13/12/2023",
+    due_date: "21/12/2023",
     status: "Sent",
   },
   {
@@ -23,8 +23,8 @@ export const invoicesArray: InvoiceType[] = [
     company_name: "Lithium V244 Electron",
     amount: 1200,
     amount_paid: 300,
-    issue_date: "15/11/2023",
-    due_date: "29/12/2023",
+    issue_date: "12/11/2023",
+    due_date: "20/12/2023",
     status: "In process",
   },
   {
