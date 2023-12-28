@@ -1,4 +1,4 @@
-import { Client } from "../../Components/Types/Client"
+import { ClientType } from "../../Components/Types/Client"
 import "./NewOrEditClient.scss"
 import { useEffect, useState } from "react"
 import Button from "@mui/material/Button"
@@ -6,14 +6,14 @@ import { BsPersonRolodex } from "react-icons/bs"
 import { makeAPIcall } from "../../Utils/API"
 
 type PropNewEditClient = {
-  client: Client | null
+  client: ClientType | null
   close: () => void
   refreshClients: () => void
 }
 
 export default function NewEditClient({ client, close, refreshClients }: PropNewEditClient) {
   console.log("1234", client)
-  const [newClient, setNewClient] = useState<Client>({
+  const [newClient, setNewClient] = useState<ClientType>({
     id: "",
     name: "",
     address: "",
@@ -35,7 +35,7 @@ export default function NewEditClient({ client, close, refreshClients }: PropNew
   const handleSave = async () => {
     setError("")
     setSaveLoading(true)
-    const fieldsToValidate = (Object.keys(newClient) as (keyof Client)[]).filter((field) => field !== "id")
+    const fieldsToValidate = (Object.keys(newClient) as (keyof ClientType)[]).filter((field) => field !== "id")
     const isFormValid = fieldsToValidate.every((field) => newClient[field].trim() !== "")
     if (isFormValid) {
       const url = newClient.id ? "/clients/update" : "/clients/create"
