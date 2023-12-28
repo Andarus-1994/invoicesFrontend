@@ -13,18 +13,15 @@ import { formatDate } from "../../../Utils/DateFormat"
 import ItemsInvoice from "./ItemsInvoice"
 import { ItemInvoiceType } from "../../../Components/Types/ItemInvoice"
 import { ClientsData } from "../../../Data/Clients"
+import { ClientType } from "../../../Components/Types/Client"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
   closeModal: () => void
 }
 
-type ClientType = {
-  id: string
-  name: string
-  address: string
-  company_address: string
-}
+type NewInvoiceType = Omit<InvoiceType, "company_name" | "company_address" | "address">
+
 export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvoiceModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
 
@@ -33,7 +30,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
-  const [newInvoice, setNewInvoice] = useState<InvoiceType>({
+  const [newInvoice, setNewInvoice] = useState<NewInvoiceType>({
     id: "",
     name: "",
     amount: "0",
@@ -42,9 +39,6 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     issue_date: formatDate(),
     client: "",
     client_id: "",
-    address: "",
-    company_name: "",
-    company_address: "",
     status: "In process",
   })
   const [clients, setClients] = useState<ClientType[]>([])
@@ -104,7 +98,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     setLoading(false)
   }
 
-  const checkValidationFields = (objectInvoice: { items: ItemInvoiceType[] } & InvoiceType) => {
+  const checkValidationFields = (objectInvoice: { items: ItemInvoiceType[] } & NewInvoiceType) => {
     const fieldsToValidate: (keyof typeof objectInvoice)[] = ["name", "client_id", "issue_date", "due_date", "items", "amount"]
     const validation = fieldsToValidate.every((field) => (field === "items" ? objectInvoice[field].length : objectInvoice[field] !== ""))
 

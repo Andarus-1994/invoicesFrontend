@@ -37,7 +37,7 @@ export const invoicesArray: InvoiceType[] = [
     amount: 1750,
     amount_paid: 300,
     issue_date: "29/08/2023",
-    due_date: "02/01/2024",
+    due_date: "10/01/2024",
     status: "In process",
   },
   {
@@ -50,7 +50,7 @@ export const invoicesArray: InvoiceType[] = [
     amount: 502,
     amount_paid: 502,
     issue_date: "23/08/2023",
-    due_date: "02/01/2024",
+    due_date: "25/02/2024",
     status: "Sent",
   },
   {
@@ -90,6 +90,19 @@ export const invoicesArray: InvoiceType[] = [
     amount_paid: 30,
     issue_date: "23/08/2023",
     due_date: "27/12/2023",
+    status: "In process",
+  },
+  {
+    id: 8,
+    name: "HBO Subscription Payment",
+    client: "Adam Floris",
+    address: "Test Address for client, more details test",
+    company_address: "Newbury city, Rios Street nr 2",
+    company_name: "HBO UK",
+    amount: 13,
+    amount_paid: 0,
+    issue_date: "23/08/2023",
+    due_date: "27/01/2024",
     status: "In process",
   },
 ]

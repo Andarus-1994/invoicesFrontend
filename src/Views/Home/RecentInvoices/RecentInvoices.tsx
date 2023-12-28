@@ -23,12 +23,12 @@ export default function RecentInvoices() {
     setloadingPage(true)
     const response = await makeAPIcall("/invoices/getAll", "GET")
     if (response.error) {
+      // setting some data for test in case the api is down
       setInvoices(InvoicesArray)
-    } else {
-      if (response.results.length) {
-        setSelectedInvoice(response.results[0])
-        setInvoices(response.results)
-      }
+    } else if (response.results.length) {
+      // set first invoice from the list
+      setSelectedInvoice(response.results[0])
+      setInvoices(response.results)
     }
     setloadingPage(false)
   }, [InvoicesArray])

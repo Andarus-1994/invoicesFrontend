@@ -1,6 +1,6 @@
-import { Client } from "../Components/Types/Client"
+import { ClientType } from "../Components/Types/Client"
 
-export const ClientsData: Client[] = [
+export const ClientsData: ClientType[] = [
   {
     id: "1",
     name: "Tom Hardy",

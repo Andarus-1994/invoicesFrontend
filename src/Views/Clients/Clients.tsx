@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
 import { useCallback, useEffect, useState } from "react"
-import { Client } from "../../Components/Types/Client"
+import { ClientType } from "../../Components/Types/Client"
 import { makeAPIcall } from "../../Utils/API"
 import { FaEdit } from "react-icons/fa"
 import { RiUserLocationLine } from "react-icons/ri"
@@ -21,7 +21,7 @@ import NewEditClient from "./NewOrEditClient"
 
 export default function Clients() {
   const [loading, setLoading] = useState(true)
-  const [clients, setClients] = useState<Client[]>([
+  const [clients, setClients] = useState<ClientType[]>([
     {
       id: "",
       name: "Loading",
@@ -71,7 +71,7 @@ export default function Clients() {
 
   const [selectedClientObject, setSelectedClientObject] = useState({
     showModal: false,
-    client: null as Client | null,
+    client: null as ClientType | null,
   })
 
   const closeNewEditModal = () => {
@@ -120,7 +120,7 @@ export default function Clients() {
                   </td>
                 </tr>
               )}
-              {clients.map((row: Client) => (
+              {clients.map((row: ClientType) => (
                 <TableRow key={row.name} sx={{ boxShadow: "0 0 3px #e8e8e870", borderRadius: "10px", background: "#fff" }}>
                   <TableCell component="th" scope="row" sx={styleCell}>
                     {row.id}
