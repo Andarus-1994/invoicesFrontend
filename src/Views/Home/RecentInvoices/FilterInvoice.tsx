@@ -57,7 +57,7 @@ export default function FilterInvoice({ filterInvoices }: FilterInvoiceProps) {
             }}
           />
           <button onClick={openNewInvoiceModal}>
-            <span>New</span> <TiDocumentAdd />
+            <span>New Invoice</span> <TiDocumentAdd />
           </button>
         </div>
       </div>

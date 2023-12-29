@@ -1,0 +1,39 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixins.scss";
+
+.wrapperInvoicesBoxes {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  .invoicesBoxData {
+    @include customBoxStyles;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 15px;
+    min-width: 250px;
+    min-height: 150px;
+    padding: 20px;
+    svg {
+      background: $primaryColor2;
+      border-radius: 50%;
+      font-size: 33px;
+      color: $primaryColor;
+      padding: 5px;
+    }
+    h3,
+    p {
+      margin: 0;
+    }
+    p {
+      text-transform: uppercase;
+      font-family: "Open Sans", sans-serif;
+      font-size: 13px;
+    }
+    h3 {
+      font-size: 22px;
+      font-weight: 400;
+    }
+  }
+}

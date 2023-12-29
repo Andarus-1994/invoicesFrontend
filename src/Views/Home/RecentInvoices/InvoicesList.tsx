@@ -5,6 +5,7 @@ import LoadingSpinner from "../../../Components/Loading/Loading"
 import { FaCheckCircle } from "react-icons/fa"
 import { PiSealWarningBold } from "react-icons/pi"
 import moment from "moment"
+import { formatCurrency } from "../../../Utils/CurrencyFormat"
 
 interface InvoicesListProps {
   invoices: InvoiceType[]
@@ -13,21 +14,6 @@ interface InvoicesListProps {
 }
 
 export default function InvoicesList({ invoices, loading, selectInvoice }: InvoicesListProps) {
-  const formatCurrency = (number: string | number) => {
-    let numberType = number
-
-    if (!isNaN(Number(number))) {
-      numberType = parseFloat(String(number))
-    }
-
-    return numberType.toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })
-  }
-
   const checkInvoiceExpiration = (invoiceParam: InvoiceType) => {
     if (Number(invoiceParam.amount) - Number(invoiceParam.amount_paid) === 0) return false
     if (invoiceParam.status === "Sent") return false

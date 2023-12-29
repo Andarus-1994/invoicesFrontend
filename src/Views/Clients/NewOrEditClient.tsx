@@ -12,7 +12,6 @@ type PropNewEditClient = {
 }
 
 export default function NewEditClient({ client, close, refreshClients }: PropNewEditClient) {
-  console.log("1234", client)
   const [newClient, setNewClient] = useState<ClientType>({
     id: "",
     name: "",
