@@ -37,7 +37,7 @@ export const invoicesArray: InvoiceType[] = [
     amount: 1750,
     amount_paid: 300,
     issue_date: "29/08/2023",
-    due_date: "10/01/2024",
+    due_date: "10/02/2024",
     status: "In process",
   },
   {
@@ -63,7 +63,7 @@ export const invoicesArray: InvoiceType[] = [
     amount: 90,
     amount_paid: 30,
     issue_date: "23/08/2023",
-    due_date: "28/12/2023",
+    due_date: "28/02/2024",
     status: "In process",
   },
   {
