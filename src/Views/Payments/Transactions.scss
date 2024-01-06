@@ -1,0 +1,66 @@
+@import "../../assets/scss/colors.scss";
+@import "../../assets/scss/mixins.scss";
+
+.transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  @include customBoxStyles;
+  margin-top: 27px;
+  padding: 20px;
+  font-family: "Asap", sans-serif;
+  max-width: fit-content;
+
+  h4 {
+    margin: 0;
+    font-weight: 500;
+  }
+  > h4 {
+    font-size: 18px;
+  }
+  .transactionsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 9px;
+    span {
+      color: $grayText;
+    }
+    .invoiceDetails {
+      text-align: center;
+    }
+    .link {
+      width: fit-content;
+      margin: 0 auto;
+      cursor: pointer;
+      color: $primaryColor;
+      transition: 0.5s;
+      &:hover {
+        color: $primaryColorHover;
+      }
+    }
+    .statusBox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .status {
+        border-radius: 20px;
+        padding: 5px;
+        text-align: center;
+        width: 50%;
+        font-size: 13px;
+        &.pending {
+          background: #ffe5cc;
+          color: #ac6740;
+        }
+        &.paid {
+          background: #eaffea;
+          color: #64b90e;
+        }
+      }
+    }
+
+    .paymentDetails {
+      text-align: center;
+    }
+  }
+}

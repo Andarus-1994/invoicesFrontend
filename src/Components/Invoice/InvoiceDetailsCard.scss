@@ -31,92 +31,92 @@
       color: $primaryColor;
     }
   }
-}
 
-.invoiceDetails {
-  @include customBoxStyles;
-  margin-top: 27px;
-  padding: 20px 40px;
-  font-family: "Asap", sans-serif;
-  min-height: 400px;
-  animation: fade-in-invoice 0.5s;
-  .gray-text {
-    color: $grayText;
-    font-weight: 500;
-    font-size: 14px;
-    margin: 0;
-  }
-  .statusSide {
-    display: flex;
-    justify-content: space-between;
-    color: $primaryColor;
-    font-size: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0;
-    button {
-      cursor: pointer;
-      background: $primaryColor;
-      color: #ffffff;
+  .invoiceDetails {
+    @include customBoxStyles;
+    margin-top: 27px;
+    padding: 20px 40px;
+    font-family: "Asap", sans-serif;
+    min-height: 400px;
+    animation: fade-in-invoice 0.5s;
+    .gray-text {
+      color: $grayText;
       font-weight: 500;
-      font-size: 16px;
-      border: 1px solid transparent;
-      border-radius: 5px;
-      padding: 10px 15px;
-      min-width: 120px;
-      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
-      transition: 0.5s;
-      &:hover {
-        background: #ffffff;
-        border: 1px solid #08afc9;
-        color: $primaryColor;
+      font-size: 14px;
+      margin: 0;
+    }
+    .statusSide {
+      display: flex;
+      justify-content: space-between;
+      color: $primaryColor;
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 0;
+      button {
+        cursor: pointer;
+        background: $primaryColor;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 16px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        padding: 10px 15px;
+        min-width: 120px;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+        transition: 0.5s;
+        &:hover {
+          background: #ffffff;
+          border: 1px solid #08afc9;
+          color: $primaryColor;
+        }
       }
     }
-  }
-  .detailsSide {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid $borderColor;
-    padding-bottom: 20px;
-    .invoice {
-      h4 {
-        font-weight: 600;
-        font-size: 22px;
-        margin-bottom: 10px;
+    .detailsSide {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid $borderColor;
+      padding-bottom: 20px;
+      .invoice {
+        h4 {
+          font-weight: 600;
+          font-size: 22px;
+          margin-bottom: 10px;
+        }
+        .labelValue {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 10px;
+        }
       }
-      .labelValue {
+      .client {
         display: flex;
         flex-direction: column;
-        margin-bottom: 10px;
+        width: 250px;
+        h4 {
+          font-weight: 600;
+          font-size: 24px;
+          margin-bottom: 5px;
+        }
       }
     }
-    .client {
+    .bottomDetails {
       display: flex;
-      flex-direction: column;
-      width: 250px;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 30px;
       h4 {
         font-weight: 600;
-        font-size: 24px;
+        font-size: 20px;
+        margin: 0;
         margin-bottom: 5px;
       }
-    }
-  }
-  .bottomDetails {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-top: 30px;
-    h4 {
-      font-weight: 600;
-      font-size: 20px;
-      margin: 0;
-      margin-bottom: 5px;
-    }
-    .address {
-      max-width: 200px;
-    }
-    p {
-      margin: 0;
+      .address {
+        max-width: 200px;
+      }
+      p {
+        margin: 0;
+      }
     }
   }
 }
