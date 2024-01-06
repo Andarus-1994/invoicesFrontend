@@ -10,6 +10,9 @@
   padding: 20px;
   font-family: "Asap", sans-serif;
   max-width: fit-content;
+  animation: fade-in-bottom 1s forwards;
+  animation-delay: 1.3s;
+  opacity: 0;
 
   h4 {
     margin: 0;
@@ -21,7 +24,7 @@
   .transactionsRow {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 9px;
+    gap: 7px;
     span {
       color: $grayText;
     }
@@ -62,5 +65,16 @@
     .paymentDetails {
       text-align: center;
     }
+  }
+}
+
+@keyframes fade-in-bottom {
+  0% {
+    opacity: 0;
+    transform: translate(0, 100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 }
