@@ -41,7 +41,7 @@
     }
   }
   @for $i from 1 through 4 {
-    $delay: 0.2s * $i;
+    $delay: 0.15s * $i;
     .invoicesBoxData:nth-child(#{$i}) {
       animation-delay: $delay;
     }
