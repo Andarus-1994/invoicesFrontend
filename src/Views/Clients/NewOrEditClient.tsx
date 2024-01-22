@@ -1,9 +1,10 @@
 import { ClientType } from "../../Components/Types/Client"
 import "./NewOrEditClient.scss"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Button from "@mui/material/Button"
 import { BsPersonRolodex } from "react-icons/bs"
 import { makeAPIcall } from "../../Utils/API"
+import { handleCloseEscp } from "../../Utils/HandleCloseEscp"
 
 type PropNewEditClient = {
   client: ClientType | null
@@ -22,7 +23,12 @@ export default function NewEditClient({ client, close, refreshClients }: PropNew
   const [error, setError] = useState("")
   const [saveLoading, setSaveLoading] = useState(false)
 
+  const modalRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.focus()
+    }
     if (client) setNewClient(client)
   }, [client])
 
@@ -53,7 +59,7 @@ export default function NewEditClient({ client, close, refreshClients }: PropNew
   return (
     <>
       <div className="coverClientModal" onClick={close}></div>
-      <div className="ClientModal">
+      <div className="ClientModal" onKeyDown={(e) => handleCloseEscp(e, close)} tabIndex={0} ref={modalRef}>
         <BsPersonRolodex />
         <h3>{newClient.id ? "Edit Client " : "Add New Client"}</h3>
         <div className="flex-row">

@@ -14,6 +14,7 @@ import ItemsInvoice from "./ItemsInvoice"
 import { ItemInvoiceType } from "../../../Components/Types/ItemInvoice"
 import { ClientsData } from "../../../Data/Clients"
 import { ClientType } from "../../../Components/Types/Client"
+import { handleCloseEscp } from "../../../Utils/HandleCloseEscp"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -105,12 +106,6 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     return validation
   }
 
-  const handleEscClose = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") {
-      closeModal()
-    }
-  }
-
   const getOption = (client: ClientType) => client.name
 
   const [showItemsModal, setShowItemsModal] = useState(false)
@@ -118,7 +113,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   return (
     <>
       <div className="coverModal" onClick={closeModal}></div>
-      <div className="newInvoiceModal" onKeyDown={handleEscClose} tabIndex={0} ref={modalRef}>
+      <div className="newInvoiceModal" onKeyDown={(e) => handleCloseEscp(e, closeModal)} tabIndex={0} ref={modalRef}>
         <IoCloseSharp className="close-icon" onClick={closeModal} />
         <LiaFileInvoiceDollarSolid />
         <h3>New Invoice</h3>
