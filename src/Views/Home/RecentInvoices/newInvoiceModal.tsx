@@ -37,7 +37,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     amount: "0",
     amount_paid: "",
     due_date: "",
-    issue_date: formatDate(),
+    issue_date: formatDate(), // default current date
     client: "",
     client_id: "",
     status: "In process",
@@ -52,6 +52,7 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
   }, [])
 
   useEffect(() => {
+    // adding up the cost of each item from the invoice
     const amount = itemsInvoices.reduce((sum, item) => sum + Number(item.price), 0)
     setNewInvoice((prevInvoice) => ({ ...prevInvoice, amount: amount.toFixed(2) }))
   }, [itemsInvoices])
