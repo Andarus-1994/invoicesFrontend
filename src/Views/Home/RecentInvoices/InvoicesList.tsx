@@ -6,6 +6,9 @@ import { FaCheckCircle } from "react-icons/fa"
 import { PiSealWarningBold } from "react-icons/pi"
 import moment from "moment"
 import { formatCurrency } from "../../../Utils/CurrencyFormat"
+import { Reorder } from "framer-motion"
+import { useState } from "react"
+import { MdDragIndicator } from "react-icons/md"
 
 interface InvoicesListProps {
   invoices: InvoiceType[]
@@ -14,6 +17,8 @@ interface InvoicesListProps {
 }
 
 export default function InvoicesList({ invoices, loading, selectInvoice }: InvoicesListProps) {
+  const [currentListInvoices, setCurrentListInvoices] = useState(invoices)
+
   const checkInvoiceExpiration = (invoiceParam: InvoiceType) => {
     if (Number(invoiceParam.amount) - Number(invoiceParam.amount_paid) === 0) return false
     if (invoiceParam.status === "Sent") return false
@@ -25,34 +30,41 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
   return (
     <>
       <div className="invoicesList">
+        <div>
+          {" "}
+          <MdDragIndicator /> Drag them to reorder
+        </div>
+
         {loading && <LoadingSpinner />}
         <div className="scrollbar">
-          {invoices.length ? (
-            invoices.map((invoice) => {
-              return (
-                <div className="invoiceItem" key={invoice.id}>
-                  <div className="client">
-                    <span onClick={() => selectInvoice(invoice)}>
-                      {invoice.client} {invoice.status === "Sent" && <FaCheckCircle />}
-                      {checkInvoiceExpiration(invoice) && (
-                        <span className="expired">
-                          <PiSealWarningBold />
-                          {"Expired "}
-                        </span>
-                      )}
-                    </span>{" "}
-                    <span> {formatCurrency(invoice.amount)}</span>
-                  </div>
-                  <div className="details">
-                    <span>INV-{invoice.id}</span>
-                    <span>{formatDate(invoice.issue_date)}</span> <span> {invoice.status}</span>
-                  </div>
-                </div>
-              )
-            })
-          ) : (
-            <div className="invoiceItem empty">No Invoices Found</div>
-          )}
+          <Reorder.Group axis="y" values={currentListInvoices} onReorder={setCurrentListInvoices}>
+            {currentListInvoices.length ? (
+              currentListInvoices.map((invoice) => {
+                return (
+                  <Reorder.Item value={invoice} className="invoiceItem" key={invoice.id}>
+                    <div className="client">
+                      <span onClick={() => selectInvoice(invoice)}>
+                        {invoice.client} {invoice.status === "Sent" && <FaCheckCircle />}
+                        {checkInvoiceExpiration(invoice) && (
+                          <span className="expired">
+                            <PiSealWarningBold />
+                            {"Expired "}
+                          </span>
+                        )}
+                      </span>{" "}
+                      <span> {formatCurrency(invoice.amount)}</span>
+                    </div>
+                    <div className="details">
+                      <span>INV-{invoice.id}</span>
+                      <span>{formatDate(invoice.issue_date)}</span> <span> {invoice.status}</span>
+                    </div>
+                  </Reorder.Item>
+                )
+              })
+            ) : (
+              <div className="invoiceItem empty">No Invoices Found</div>
+            )}
+          </Reorder.Group>
         </div>
       </div>
     </>
