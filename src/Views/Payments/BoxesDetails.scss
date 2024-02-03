@@ -7,10 +7,11 @@
   gap: 15px;
 
   .invoicesBoxData {
-    @include customBoxStyles;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 10px;
     border-radius: 15px;
     min-width: 250px;
@@ -36,8 +37,8 @@
       font-size: 13px;
     }
     h3 {
-      font-size: 22px;
-      font-weight: 400;
+      font-size: 25px;
+      font-weight: 600;
     }
   }
   @for $i from 1 through 4 {

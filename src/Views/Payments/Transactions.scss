@@ -5,9 +5,10 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  @include customBoxStyles;
+  box-shadow: 0 0 3px #0000004d;
+  border-radius: 15px;
   margin-top: 27px;
-  padding: 20px;
+  padding: 20px 20px 50px;
   font-family: "Asap", sans-serif;
   max-width: fit-content;
   animation: fade-in-bottom 1s forwards;
@@ -21,7 +22,7 @@
   > h4 {
     font-size: 20px;
     color: $primaryColor;
-    border-bottom: 1px solid #dadada;
+    border-bottom: 1px solid #f0f0f0;
   }
   .transactionsRow {
     display: grid;
