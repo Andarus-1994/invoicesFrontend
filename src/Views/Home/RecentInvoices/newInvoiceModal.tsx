@@ -12,9 +12,9 @@ import { makeAPIcall } from "../../../Utils/API"
 import { formatDate } from "../../../Utils/DateFormat"
 import ItemsInvoice from "./ItemsInvoice"
 import { ItemInvoiceType } from "../../../Components/Types/ItemInvoice"
-import { ClientsData } from "../../../Data/Clients"
 import { ClientType } from "../../../Components/Types/Client"
 import { handleCloseEscp } from "../../../Utils/HandleCloseEscp"
+import { useClientsStore } from "../../../Store/clientsStore"
 
 type NewInvoiceModalProps = {
   refreshInvoices: () => void
@@ -24,6 +24,10 @@ type NewInvoiceModalProps = {
 type NewInvoiceType = Omit<InvoiceType, "company_name" | "company_address" | "address">
 
 export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvoiceModalProps) {
+  const clientsStore = useClientsStore((state) => state.clients)
+  const loadingClients = useClientsStore((state) => state.loading)
+  const fetchClientsStore = useClientsStore((state) => state.getClients)
+
   const modalRef = useRef<HTMLDivElement>(null)
 
   // list of the Items for the modal
@@ -42,29 +46,20 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
     client_id: "",
     status: "In process",
   })
-  const [clients, setClients] = useState<ClientType[]>([])
 
   useEffect(() => {
     if (modalRef.current) {
       modalRef.current.focus()
     }
-    getClientsForSelectOptions()
-  }, [])
+
+    if (clientsStore.length === 0) fetchClientsStore()
+  }, [clientsStore.length, fetchClientsStore])
 
   useEffect(() => {
     // adding up the cost of each item from the invoice
     const amount = itemsInvoices.reduce((sum, item) => sum + Number(item.price), 0)
     setNewInvoice((prevInvoice) => ({ ...prevInvoice, amount: amount.toFixed(2) }))
   }, [itemsInvoices])
-
-  const getClientsForSelectOptions = async () => {
-    const response = await makeAPIcall("/clients/getAll", "GET")
-    if (!response.error) {
-      setClients(response.results)
-    } else {
-      setClients(ClientsData)
-    }
-  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value
@@ -121,11 +116,12 @@ export default function NewInvoiceModal({ refreshInvoices, closeModal }: NewInvo
         <div>
           <label className="required">Client</label>
           <Select
-            options={clients}
+            options={clientsStore}
             getOptionLabel={getOption}
             getOptionValue={getOption}
             placeholder="Select a client"
             menuPlacement="top"
+            isLoading={loadingClients}
             onChange={(event) => {
               if (event?.name !== undefined) setNewInvoice({ ...newInvoice, client: event?.name.toString(), client_id: event?.id.toString() })
             }}

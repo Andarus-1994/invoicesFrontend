@@ -6,52 +6,26 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { ClientType } from "../../Components/Types/Client"
-import { makeAPIcall } from "../../Utils/API"
 import { FaEdit } from "react-icons/fa"
 import { RiUserLocationLine } from "react-icons/ri"
 import { MdOutlineLocationCity } from "react-icons/md"
 import { MdDeleteSweep } from "react-icons/md"
-import { ClientsData } from "../../Data/Clients"
-import LoadingSpinner from "../../Components/Loading/Loading"
 import Pagination from "@mui/material/Pagination"
 import Button from "@mui/material/Button"
 import NewEditClient from "./NewOrEditClient"
+import { useClientsStore } from "../../Store/clientsStore"
+import TableRowsLoader from "./Components/TableLoader"
 
 export default function Clients() {
-  const [loading, setLoading] = useState(true)
-  const [clients, setClients] = useState<ClientType[]>([
-    {
-      id: "",
-      name: "Loading",
-      address: "",
-      company_name: "",
-      company_address: "",
-    },
-    {
-      id: "",
-      name: "Getting Clients...",
-      address: "",
-      company_name: "",
-      company_address: "",
-    },
-  ])
-
-  const fetchAllClients = useCallback(async () => {
-    setLoading(true)
-    const response = await makeAPIcall("/clients/getAll", "GET")
-    if (response.error) {
-      setClients(ClientsData)
-    } else {
-      setClients(response.results)
-    }
-    setLoading(false)
-  }, [])
+  const clientsStore = useClientsStore((state) => state.clients)
+  const loadingClients = useClientsStore((state) => state.loading)
+  const fetchClientsStore = useClientsStore((state) => state.getClients)
 
   useEffect(() => {
-    fetchAllClients()
-  }, [fetchAllClients])
+    if (clientsStore.length === 0) fetchClientsStore()
+  }, [fetchClientsStore, clientsStore.length])
 
   const styleCell = { border: "none", fontFamily: "'Asap', sans-serif", fontSize: "15px" }
   const styleCellHeader = {
@@ -85,7 +59,7 @@ export default function Clients() {
   return (
     <div className="clients">
       {selectedClientObject.showModal && (
-        <NewEditClient client={selectedClientObject.client} close={closeNewEditModal} refreshClients={fetchAllClients} />
+        <NewEditClient client={selectedClientObject.client} close={closeNewEditModal} refreshClients={fetchClientsStore} />
       )}
       <div className="headerClients">
         <h3>Clients Details</h3>
@@ -112,15 +86,8 @@ export default function Clients() {
               </TableRow>
             </TableHead>
             <TableBody sx={{ position: "relative", minHeight: "300px" }}>
-              {loading && (
-                <tr>
-                  <td>
-                    {" "}
-                    <LoadingSpinner />
-                  </td>
-                </tr>
-              )}
-              {clients.map((row: ClientType) => (
+              {loadingClients && <TableRowsLoader rowsNum={5} />}
+              {clientsStore.map((row: ClientType) => (
                 <TableRow key={row.name} sx={{ boxShadow: "0 0 3px #e8e8e870", borderRadius: "10px", background: "#fff" }}>
                   <TableCell component="th" scope="row" sx={styleCell}>
                     {row.id}

@@ -49,15 +49,13 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-
     min-width: 170px;
     gap: 20px;
     transition: 0.5s;
     & > .active,
     &:hover {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
-      background: #15c7e26c;
+      border-radius: 10px;
+      background: linear-gradient(30deg, #1874856c, #15c7e26c);
       color: #c2f7ff;
     }
     & > .active {
