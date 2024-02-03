@@ -4,6 +4,7 @@ import { formatDate } from "../../Utils/DateFormat"
 import { RiSecurePaymentLine } from "react-icons/ri"
 import { SVGInvoiceSelect } from "./svgInvoiceSelect"
 import { formatCurrency } from "../../Utils/CurrencyFormat"
+import { NavLink } from "react-router-dom"
 
 interface InvoiceProps {
   invoice: InvoiceType | null
@@ -71,13 +72,19 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
               <p>{formatDate(invoice.due_date)}</p>
             </div>
           </div>
+          <NavLink className="edit" to={"/editInvoice/" + invoice.id}>
+            Click Here to Edit Invoice
+          </NavLink>
+          <div className="edit"></div>
         </div>
       </div>
-      {Number(invoice.amount) - Number(invoice.amount_paid) !== 0 && invoice.status === "In process" && (
-        <button key={invoice.id}>
-          {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))} - Pay <RiSecurePaymentLine />
-        </button>
-      )}
+      <div className="footerContainerInvoiceDetails">
+        {Number(invoice.amount) - Number(invoice.amount_paid) !== 0 && invoice.status === "In process" && (
+          <button key={invoice.id}>
+            {formatCurrency(Number(invoice.amount) - Number(invoice.amount_paid))} - Pay <RiSecurePaymentLine />
+          </button>
+        )}
+      </div>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import { FiHome } from "react-icons/fi"
 import { IoMdContacts } from "react-icons/io"
 import { TbSettingsCode, TbMoneybag } from "react-icons/tb"
 import { motion } from "framer-motion"
+import { LuTrash } from "react-icons/lu"
 
 export default function SideMenu() {
   const location = useLocation()
@@ -24,10 +25,18 @@ export default function SideMenu() {
       name: "Payments",
       icon: <TbMoneybag />,
     },
+  ]
+
+  const RoutesLinksBottom = [
     {
       path: "/settings",
       name: "Settings",
       icon: <TbSettingsCode />,
+    },
+    {
+      path: "/recycle",
+      name: "Recycle Bin",
+      icon: <LuTrash />,
     },
   ]
   return (
@@ -73,6 +82,24 @@ export default function SideMenu() {
       <ul>
         <h3>Main Sections</h3>
         {RoutesLinks.map((route) => {
+          return (
+            <li key={route.name}>
+              <NavLink
+                to={route.path}
+                className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
+                  return isActive ? "active" : isPending ? "pending" : ""
+                }}
+              >
+                {route.icon} <span>{route.name}</span>
+                {location.pathname === route.path ? (
+                  <motion.div transition={{ type: "spring" }} layoutId="underline" className="active"></motion.div>
+                ) : null}
+              </NavLink>
+            </li>
+          )
+        })}
+        <h3>Utils</h3>
+        {RoutesLinksBottom.map((route) => {
           return (
             <li key={route.name}>
               <NavLink
