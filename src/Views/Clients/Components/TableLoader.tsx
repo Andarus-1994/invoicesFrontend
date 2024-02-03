@@ -7,7 +7,7 @@ type PropsTableLoader = {
 }
 
 export default function TableRowsLoader({ rowsNum }: PropsTableLoader) {
-  return [...Array(rowsNum)].map((row, index) => (
+  return [...Array(rowsNum)].map((index) => (
     <TableRow key={index}>
       <TableCell component="th" scope="row">
         <Skeleton animation="wave" variant="text" />

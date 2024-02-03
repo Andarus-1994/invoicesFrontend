@@ -53,9 +53,12 @@
     gap: 20px;
     transition: 0.5s;
     & > .active,
-    &:hover {
+    &:hover:not(.active) {
       border-radius: 10px;
       background: linear-gradient(30deg, #1874856c, #15c7e26c);
+      color: #c2f7ff;
+    }
+    &:hover {
       color: #c2f7ff;
     }
     & > .active {
