@@ -10,12 +10,13 @@ type DatePickerProps = {
   label: string
   value: string
   error?: boolean
+  disabled?: boolean
   setDate: (date: string) => void
 }
 
 type DatePickerFormat = dayjs.Dayjs | null
 
-export default function MyDatePicker({ label, value, error, setDate }: DatePickerProps) {
+export default function MyDatePicker({ label, value, error, disabled, setDate }: DatePickerProps) {
   const [selectedDate, setSelectedDate] = React.useState<DatePickerFormat>(null)
 
   const handleDateChange = (date: DatePickerFormat) => {
@@ -40,6 +41,7 @@ export default function MyDatePicker({ label, value, error, setDate }: DatePicke
         onChange={handleDateChange}
         sx={{ width: "100%" }}
         className={error ? "error" : ""}
+        disabled={disabled}
         slotProps={{
           textField: { size: "small" },
           actionBar: {

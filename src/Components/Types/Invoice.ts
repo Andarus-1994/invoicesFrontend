@@ -13,4 +13,4 @@ export type InvoiceType = {
   status: StatusInvoice
 }
 
-type StatusInvoice = "In process" | "Sent" | "Canceled" | ""
+export type StatusInvoice = "In process" | "Sent" | "Canceled" | ""
