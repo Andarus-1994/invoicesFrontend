@@ -30,8 +30,7 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
   return (
     <>
       <div className="invoicesList">
-        <div>
-          {" "}
+        <div style={{ display: "flex", alignItems: "center" }}>
           <MdDragIndicator /> Drag them to reorder
         </div>
 

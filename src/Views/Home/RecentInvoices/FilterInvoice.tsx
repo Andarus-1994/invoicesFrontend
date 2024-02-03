@@ -35,6 +35,7 @@ export default function FilterInvoice({ filterInvoices }: FilterInvoiceProps) {
   return (
     <>
       {showNewInvoiceModal && <NewInvoiceModal refreshInvoices={refreshInvoices} closeModal={() => setShowNewInvoiceModal(false)} />}
+
       <div className="filterInvoice">
         <label>Invoice</label>
         <div className="actionBar">

@@ -1,10 +1,35 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import "./SideMenu.scss"
 import { FiHome } from "react-icons/fi"
 import { IoMdContacts } from "react-icons/io"
 import { TbSettingsCode, TbMoneybag } from "react-icons/tb"
+import { motion } from "framer-motion"
 
 export default function SideMenu() {
+  const location = useLocation()
+
+  const RoutesLinks = [
+    {
+      path: "/",
+      name: "Home",
+      icon: <FiHome />,
+    },
+    {
+      path: "/clients",
+      name: "Clients",
+      icon: <IoMdContacts />,
+    },
+    {
+      path: "/payments",
+      name: "Payments",
+      icon: <TbMoneybag />,
+    },
+    {
+      path: "/settings",
+      name: "Settings",
+      icon: <TbSettingsCode />,
+    },
+  ]
   return (
     <div className="sideNav">
       {" "}
@@ -46,49 +71,24 @@ export default function SideMenu() {
         </svg>
       </div>
       <ul>
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
-              return isActive ? "active" : isPending ? "pending" : ""
-            }}
-          >
-            <FiHome /> <span>Home</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/clients"
-            className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
-              return isActive ? "active" : isPending ? "pending" : ""
-            }}
-          >
-            <IoMdContacts />
-            <span>Clients</span>{" "}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/payments"
-            className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
-              return isActive ? "active" : isPending ? "pending" : ""
-            }}
-          >
-            <TbMoneybag />
-            <span>Payments</span>{" "}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/settings"
-            className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
-              return isActive ? "active" : isPending ? "pending" : ""
-            }}
-          >
-            <TbSettingsCode />
-            <span>Settings</span>{" "}
-          </NavLink>
-        </li>
+        <h3>Main Sections</h3>
+        {RoutesLinks.map((route) => {
+          return (
+            <li key={route.name}>
+              <NavLink
+                to={route.path}
+                className={({ isActive, isPending }: { isActive: boolean; isPending: boolean }) => {
+                  return isActive ? "active" : isPending ? "pending" : ""
+                }}
+              >
+                {route.icon} <span>{route.name}</span>
+                {location.pathname === route.path ? (
+                  <motion.div transition={{ type: "spring" }} layoutId="underline" className="active"></motion.div>
+                ) : null}
+              </NavLink>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

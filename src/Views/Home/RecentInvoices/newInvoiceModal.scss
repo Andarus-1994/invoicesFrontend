@@ -15,14 +15,14 @@
   animation: fade-in-new-invoice 0.8s forwards;
   & > *:nth-child(odd):not(svg) {
     opacity: 0;
-    animation: 0.5s fade-in-right forwards ease-out;
+    animation: 0.5s fade-in-left forwards ease-out;
   }
   & > *:nth-child(even):not(svg) {
     opacity: 0;
-    animation: 0.5s fade-in-left forwards ease-out;
+    animation: 0.5s fade-in-right forwards ease-out;
   }
   @for $i from 1 through 10 {
-    $delay: 0.5s + 0.1s * $i;
+    $delay: 0.1s + 0.1s * $i;
     & > *:nth-child(#{$i}):not(svg) {
       animation-delay: $delay;
     }
@@ -147,8 +147,8 @@
   @keyframes fade-in-new-invoice {
     0% {
       opacity: 0;
-      translate: -100% -100%;
-      scale: 0.1;
+      translate: -50% -70%;
+      scale: 0.5;
     }
     100% {
       translate: -50% -50%;
@@ -160,28 +160,28 @@
   @keyframes fade-in-left {
     0% {
       opacity: 0;
-      transform: translate(-50px, 70px);
+      transform: translate(-50px, 70px) scale(0.6);
     }
     70% {
       opacity: 0.5;
     }
     100% {
       opacity: 1;
-      transform: translate(0, 0);
+      transform: translate(0, 0) scale(1);
     }
   }
 
   @keyframes fade-in-right {
     0% {
       opacity: 0;
-      transform: translate(50px, 70px);
+      transform: translate(50px, 70px) scale(0.6);
     }
     70% {
       opacity: 0.5;
     }
     100% {
       opacity: 1;
-      transform: translate(0, 0);
+      transform: translate(0, 0) scale(1);
     }
   }
 }
