@@ -66,7 +66,7 @@ export default function RecentInvoices() {
           <Fragment>
             <div>
               <FilterInvoice filterInvoices={filterInvoices} />
-              <InvoicesList invoices={invoices} selectInvoice={selectInvoiceFunction} loading={loadingInvoices} />
+              <InvoicesList key={invoices.length} invoices={invoices} selectInvoice={selectInvoiceFunction} loading={loadingInvoices} />
             </div>
             <InvoiceDetailsCard invoice={selectedInvoice} />
           </Fragment>
