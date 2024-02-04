@@ -26,9 +26,9 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
     const dueDate = moment(invoiceParam.due_date, "DD-MM-YYYY")
     console.log(today.isSameOrAfter(dueDate, "day"))
 
-    if (today.isSameOrAfter(dueDate, "day")) return false
+    if (today.isAfter(dueDate, "day")) return true
 
-    return true
+    return false
   }
 
   return (
