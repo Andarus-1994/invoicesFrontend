@@ -23,8 +23,7 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
     if (Number(invoiceParam.amount) - Number(invoiceParam.amount_paid) === 0) return false
     if (invoiceParam.status === "Sent") return false
     const today = moment()
-    const dueDate = moment(invoiceParam.due_date, "DD-MM-YYYY")
-    console.log(today.isSameOrAfter(dueDate, "day"))
+    const dueDate = moment(invoiceParam.due_date)
 
     if (today.isAfter(dueDate, "day")) return true
 
