@@ -85,6 +85,19 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
           </button>
         )}
       </div>
+      <div>
+        <h3>{invoice.name} - Details</h3>
+        {invoice.items?.map((itemInvoice) => {
+          return (
+            <div key={itemInvoice.id}>
+              <div>
+                {itemInvoice.name} - {formatCurrency(itemInvoice.price)}
+              </div>
+              <div>Description: {itemInvoice.description}</div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

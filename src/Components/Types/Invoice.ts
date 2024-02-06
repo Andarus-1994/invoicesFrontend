@@ -1,3 +1,5 @@
+import { ItemInvoiceType } from "./ItemInvoice"
+
 export type InvoiceType = {
   id: string | number
   name: string
@@ -11,6 +13,7 @@ export type InvoiceType = {
   company_name: string
   company_address: string
   status: StatusInvoice
+  items?: ItemInvoiceType[]
 }
 
 export type StatusInvoice = "In process" | "Sent" | "Canceled" | ""
