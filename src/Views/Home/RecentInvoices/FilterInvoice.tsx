@@ -19,7 +19,6 @@ export default function FilterInvoice({ filterInvoices }: FilterInvoiceProps) {
   ]
 
   const filterEvent = async (filter: string) => {
-    console.log("test")
     setFilterValue(filter)
     filterInvoices(filter)
   }

@@ -93,7 +93,8 @@ export default function ItemsInvoice({ close, setItem, items }: ItemsInvoiceProp
         <div className="textAreaRow">
           <textarea name="description" placeholder="Description" value={newItem.description} onChange={handleInputChange} rows={2} />
         </div>
-        <span>All fields are required</span> <Button onClick={addItemToList}>Add Item</Button>
+        <span>All fields are required</span>
+        <Button onClick={addItemToList}>Add Item</Button>
       </div>
     </div>
   )

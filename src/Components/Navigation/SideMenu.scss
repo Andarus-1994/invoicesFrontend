@@ -26,7 +26,7 @@
     padding-left: 15px;
   }
   ul {
-    box-shadow: 0 0 1px 1px #c9d3df, 0 0 0 5px $primaryColor;
+    box-shadow: 0 0 1px 1px #c9d3df, 0 0 0 3px $primaryColor;
     width: 100%;
     height: 100%;
     display: flex;
@@ -70,7 +70,10 @@
       z-index: -1;
     }
     svg {
-      font-size: 20px;
+      border: 1px solid #c2f7ff;
+      border-radius: 10px;
+      padding: 5px;
+      font-size: 30px;
     }
   }
 }
