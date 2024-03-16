@@ -54,6 +54,11 @@ export default function RecentInvoices() {
     setSelectedInvoice(value)
   }
 
+  const refreshInvoices = () => {
+    console.log("refresh here")
+    fetchAllInvoices()
+  }
+
   return (
     <>
       {loadingPage ? (
@@ -68,7 +73,7 @@ export default function RecentInvoices() {
               <FilterInvoice filterInvoices={filterInvoices} />
               <InvoicesList key={invoices.length} invoices={invoices} selectInvoice={selectInvoiceFunction} loading={loadingInvoices} />
             </div>
-            <InvoiceDetailsCard invoice={selectedInvoice} />
+            <InvoiceDetailsCard invoice={selectedInvoice} refreshInvoices={refreshInvoices} />
           </Fragment>
         </div>
       )}

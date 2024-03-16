@@ -99,3 +99,20 @@
     opacity: 1;
   }
 }
+
+@keyframes fade-in-new-client {
+  0% {
+    opacity: 0;
+    transform: rotateX(-50deg) translateZ(-200px) translateX(-40%) translateY(-40%) scale(0.6);
+  }
+  60% {
+    transform: rotateX(5deg) translateZ(-15px) translateX(-52%) translateY(-52%) scale(1.06);
+  }
+  85% {
+    transform: rotateX(-5deg) translateZ(10px) translateX(-48%) translateY(-49%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+}

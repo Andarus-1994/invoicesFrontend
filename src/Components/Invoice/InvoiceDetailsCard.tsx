@@ -5,12 +5,15 @@ import { RiSecurePaymentLine } from "react-icons/ri"
 import { SVGInvoiceSelect } from "./svgInvoiceSelect"
 import { formatCurrency } from "../../Utils/CurrencyFormat"
 import { NavLink } from "react-router-dom"
+import { FaTrash } from "react-icons/fa6"
+import { makeAPIcall } from "../../Utils/API"
 
 interface InvoiceProps {
   invoice: InvoiceType | null
+  refreshInvoices?: () => void
 }
 
-export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
+export default function InvoiceDetailsCard({ invoice, refreshInvoices }: InvoiceProps) {
   if (invoice === null)
     return (
       <div className="containerDetails">
@@ -22,15 +25,25 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
       </div>
     )
 
+  const deleteInvoice = async () => {
+    const postData = {
+      id: invoice.id,
+    }
+    const response = await makeAPIcall("/invoices/remove", "POST", postData)
+
+    if (refreshInvoices && !response.error) refreshInvoices()
+  }
+
   return (
     <div className="containerDetails" key={invoice.id}>
       <div className="invoiceDetails">
+        <FaTrash className="deleteInvoice" onClick={deleteInvoice} />
         <div className="statusSide">
           <span>Status : {invoice.status}</span> <button>Export</button>
         </div>
         <div className="detailsSide">
           <div className="invoice">
-            <h4>Invoice : {invoice.id}</h4>
+            <h4> Invoice : {invoice.id}</h4>
             <div className="labelValue">
               <label className="gray-text">Invoice Number</label>
               {invoice.id}
@@ -85,18 +98,17 @@ export default function InvoiceDetailsCard({ invoice }: InvoiceProps) {
           </button>
         )}
       </div>
-      <div>
-        <h3>{invoice.name} - Details</h3>
-        {invoice.items?.map((itemInvoice) => {
-          return (
-            <div key={itemInvoice.id}>
-              <div>
-                {itemInvoice.name} - {formatCurrency(itemInvoice.price)}
+      <div className="invoicePaymentDetails">
+        <h3>{invoice.name} (Details)</h3>
+        <div className="flexInvoicePaymentDetails">
+          {invoice.items?.map((itemInvoice) => {
+            return (
+              <div className="row" key={itemInvoice.id}>
+                {itemInvoice.name} - {formatCurrency(itemInvoice.price)} <span>({itemInvoice.description})</span>
               </div>
-              <div>Description: {itemInvoice.description}</div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
     </div>
   )
