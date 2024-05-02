@@ -65,27 +65,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 5px;
     background: $primaryColor;
     color: #ffffff;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Asap", sans-serif;
     border: 1px solid transparent;
     border-radius: 5px;
-    padding: 12px 35px;
+    padding: 10px 35px;
     min-width: 150px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     transition: 0.5s;
+    svg {
+      position: relative;
+      font-size: 16px;
+      top: 2px;
+    }
     &.back {
-      background: #a5a5a5;
+      background: #eeeeee;
+      color: $grayText;
     }
     &:hover {
       background: #ffffff;
       border: 1px solid $primaryColor;
       color: $primaryColor;
+      gap: 10px;
     }
-    svg {
-      font-size: 20px;
+    &.disabled {
+      pointer-events: none;
+      background: #acacac;
+      color: #cfcfcf;
     }
   }
 }

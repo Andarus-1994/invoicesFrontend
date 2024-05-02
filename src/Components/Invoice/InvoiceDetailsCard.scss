@@ -82,6 +82,10 @@
       margin: 0;
 
       button {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
         background: $primaryColor;
         color: #ffffff;

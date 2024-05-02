@@ -24,6 +24,7 @@ export default function MyDatePicker({ label, value, error, disabled, setDate }:
     setSelectedDate(date)
     if (date) {
       const formattedDate = formatDate(dayjs(date).format("DD/MM/YYYY"))
+      console.log(formattedDate)
       setDate(formattedDate)
     }
   }
