@@ -46,7 +46,7 @@ export default function InvoicesList({ invoices, loading, selectInvoice }: Invoi
                   <Reorder.Item value={invoice} className="invoiceItem" key={invoice.id}>
                     <div className="client">
                       <span onClick={() => selectInvoice(invoice)}>
-                        {invoice.client} {invoice.status === "Sent" && <FaCheckCircle />}
+                        {invoice.name} {invoice.status === "Sent" && <FaCheckCircle />}
                         {checkInvoiceExpiration(invoice) && (
                           <span className="expired">
                             <PiSealWarningBold />
