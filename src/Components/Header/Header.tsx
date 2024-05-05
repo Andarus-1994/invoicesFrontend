@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <>
       <div className="header">
-        <h3>Invoice Management</h3>
+        <h3>Invoices Manager</h3>
         <h4>Dashboard</h4>
         <div className="bgIcons">
           <svg width="69px" height="69px" viewBox="-9.5 0 67 67" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#000000">
@@ -35,10 +35,7 @@ export default function Header() {
                   <path d="M31.3,10.4 C31.3,10.4 40,10.9 45.2,7.6" id="Shape">
                     {" "}
                   </path>{" "}
-                  <path
-                    d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1"
-                    id="Shape"
-                  >
+                  <path d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1" id="Shape">
                     {" "}
                   </path>{" "}
                   <path d="M14.1,38.9 L26,38.9" id="Shape">
@@ -51,16 +48,7 @@ export default function Header() {
               </g>{" "}
             </g>
           </svg>
-          <svg
-            fill="#08afc9"
-            height="67px"
-            width="67px"
-            version="1.1"
-            id="Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            stroke="#08afc9"
-          >
+          <svg fill="#08afc9" height="67px" width="67px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" stroke="#08afc9">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
             <g id="SVGRepo_iconCarrier">
@@ -130,10 +118,7 @@ export default function Header() {
                   <path d="M31.3,10.4 C31.3,10.4 40,10.9 45.2,7.6" id="Shape">
                     {" "}
                   </path>{" "}
-                  <path
-                    d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1"
-                    id="Shape"
-                  >
+                  <path d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1" id="Shape">
                     {" "}
                   </path>{" "}
                   <path d="M14.1,38.9 L26,38.9" id="Shape">
@@ -162,16 +147,7 @@ export default function Header() {
             </g>
           </svg>
 
-          <svg
-            fill="#08afc9"
-            width="64px"
-            height="64px"
-            viewBox="0 0 24 24"
-            id="time-alert-2"
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon line"
-            stroke="#08afc9"
-          >
+          <svg fill="#08afc9" width="64px" height="64px" viewBox="0 0 24 24" id="time-alert-2" xmlns="http://www.w3.org/2000/svg" className="icon line" stroke="#08afc9">
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
             <g id="SVGRepo_iconCarrier">
@@ -233,10 +209,7 @@ export default function Header() {
                   <path d="M31.3,10.4 C31.3,10.4 40,10.9 45.2,7.6" id="Shape">
                     {" "}
                   </path>{" "}
-                  <path
-                    d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1"
-                    id="Shape"
-                  >
+                  <path d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1" id="Shape">
                     {" "}
                   </path>{" "}
                   <path d="M14.1,38.9 L26,38.9" id="Shape">
@@ -292,10 +265,7 @@ export default function Header() {
                   <path d="M31.3,10.4 C31.3,10.4 40,10.9 45.2,7.6" id="Shape">
                     {" "}
                   </path>{" "}
-                  <path
-                    d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1"
-                    id="Shape"
-                  >
+                  <path d="M29.9,48.5 C28.5,50.1 26.7,51 24.7,51 C20.4,51 17,46.7 17,41.3 C17,36 20.5,32 24.7,32 C26.7,32 28.4,32.6 29.8,34.1" id="Shape">
                     {" "}
                   </path>{" "}
                   <path d="M14.1,38.9 L26,38.9" id="Shape">
